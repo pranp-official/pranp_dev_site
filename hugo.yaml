@@ -1,0 +1,60 @@
+baseURL: "https://pranp.dev/"
+languageCode: en-us
+title: "My Blog"
+theme: PaperMod
+
+pagination:
+  pagerSize: 10
+
+enableRobotsTXT: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  env: production
+  title: "Pranav"
+  description: "Notes on cloud security and identity"
+  author: "Pranav"
+  defaultTheme: auto        # follows the system light/dark setting
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  ShowToc: true
+
+  homeInfoParams:
+    Title: "Hi there"
+    Content: "Short intro about you and what you write about."
+
+  socialIcons:
+    - name: github
+      url: "https://github.com/pranp-official"
+    - name: linkedin
+      url: "https://www.linkedin.com/in/pranp"
+
+menu:
+  main:
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 10
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: search
+      name: Search
+      url: /search/
+      weight: 20
+    - identifier: archives
+      name: Archive
+      url: /archives/
+      weight: 30
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 40
