@@ -117,7 +117,7 @@ I did this work around my undergraduate years, mostly in machine learning, befor
 
 ## Honors & Scholarships
 
-* **J.N. Tata Endowment Scholar (2026):** Awarded the J.N. Tata Endowment Loan Scholarship for higher education abroad following a rigorous nationwide technical selection process.
+* **J.N. Tata Endowment Scholar (2026):** Awarded the J.N. Tata Endowment Scholarship for higher education abroad following a rigorous nationwide technical selection process.
 * **4× Spot Awards — Oracle Cloud Infrastructure (2025):** Recognized for engineering excellence in cloud identity infrastructure.
 
 ---
