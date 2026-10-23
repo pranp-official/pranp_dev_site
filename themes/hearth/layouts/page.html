@@ -15,10 +15,13 @@
   </header>
   {{ partial "toc.html" . }}
   <div class="prose">{{ .Content }}</div>
-  {{ if and (ne .Section "") (ne .Params.author false) }}
+  {{ if .Params.author_box }}
     {{ partial "author-box.html" . }}
-  {{ else if .Params.author_box }}
-    {{ partial "author-box.html" . }}
+  {{ end }}
+  {{ if ne .Section "" }}
+    <footer class="post-footer">
+      <p class="back-link"><a href="{{ if eq .Section "blog" }}{{ "blog/" | relLangURL }}{{ else if eq .Section "notes" }}{{ "notes/" | relLangURL }}{{ else }}{{ "/" | relLangURL }}{{ end }}">← Back to {{ if eq .Section "blog" }}all posts{{ else if eq .Section "notes" }}all notes{{ else }}home{{ end }}</a></p>
+    </footer>
   {{ end }}
 </article>
 {{ end }}
