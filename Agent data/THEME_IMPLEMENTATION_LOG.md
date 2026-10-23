@@ -105,6 +105,12 @@ This document records the architectural decisions, progress, and verification ch
   * Configured `"not_found_handling": "404-page"` in `wrangler.jsonc` for Cloudflare Workers Static Assets.
   * Completely removed `themes/PaperMod` Git submodule and `.gitmodules` file. The repository now carries no external submodule build dependencies.
   * Ran local production build: `hugo --gc --minify` finished cleanly in 16 ms with zero warnings and zero errors.
+- [x] **Phase 11**: Brand Identity & Dynamic Favicon Suite
+  * Generated editorial "P" lettermark favicon suite aligned with the Hearth terracotta/parchment palette and security architecture identity.
+  * Provided vector `favicon.svg` with embedded `@media (prefers-color-scheme: dark)` styling for dynamic browser tab light/dark theme adaptation.
+  * Generated multi-resolution `favicon.ico` (16x16, 32x32, 48x48), `favicon-32x32.png`, `favicon-16x16.png`, and `apple-touch-icon.png` (180x180).
+  * Added `site.webmanifest` and configured `<meta name="theme-color">` for light and dark browser chrome in `_partials/head.html`.
+
 
 ---
 
