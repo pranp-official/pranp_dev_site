@@ -1,5 +1,6 @@
 <article class="card">
-  {{ partial "post-meta.html" . }}
+  {{ partial "post-meta.html" (dict "page" . "hideTags" true) }}
   <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-  <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}</p>
+  <p class="card-summary">{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
+  <a href="{{ .RelPermalink }}" class="card-read-more" aria-label="Read more: {{ .Title }}">Read more →</a>
 </article>
