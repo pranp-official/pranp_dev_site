@@ -42,7 +42,7 @@
 <aside class="author-box" aria-label="Author information">
   {{ with $image }}
     <div class="author-avatar">
-      <img src="{{ . | relURL }}" alt="{{ $name }}" class="author-avatar-img" width="72" height="72" loading="lazy">
+      {{ partial "avatar.html" (dict "src" . "alt" $name "size" 72 "class" "author-avatar-img" "loading" "lazy") }}
     </div>
   {{ end }}
   <div class="author-details">

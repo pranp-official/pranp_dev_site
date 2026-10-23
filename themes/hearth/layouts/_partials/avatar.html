@@ -1,0 +1,30 @@
+{{ $src := .src | default site.Params.author.image }}
+{{ $alt := .alt | default (site.Params.author.name | default site.Title) }}
+{{ $size := .size | default 44 }}
+{{ $class := .class | default "avatar-image" }}
+{{ $loading := .loading | default "eager" }}
+
+{{ $cleanSrc := strings.TrimPrefix "/" $src }}
+{{ $res := resources.Get $cleanSrc }}
+
+{{ if and $res (ne $res.MediaType.SubType "svg") }}
+  {{ $size1x := printf "%dx%d webp q85" $size $size }}
+  {{ $size2x := printf "%dx%d webp q85" (mul $size 2) (mul $size 2) }}
+  {{ $img1x := $res.Fill $size1x }}
+  {{ $img2x := $res.Fill $size2x }}
+  <img src="{{ $img1x.RelPermalink }}"
+       srcset="{{ $img1x.RelPermalink }} 1x, {{ $img2x.RelPermalink }} 2x"
+       width="{{ $size }}"
+       height="{{ $size }}"
+       alt="{{ $alt }}"
+       class="{{ $class }}"
+       loading="{{ $loading }}"
+       decoding="async">
+{{ else }}
+  <img src="{{ $src | relURL }}"
+       width="{{ $size }}"
+       height="{{ $size }}"
+       alt="{{ $alt }}"
+       class="{{ $class }}"
+       loading="{{ $loading }}">
+{{ end }}

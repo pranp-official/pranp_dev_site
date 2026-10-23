@@ -1,8 +1,8 @@
 ---
 title: "About"
 description: "Background, security engineering focus, and experience."
-image: "/images/author.svg"
-image_alt: "Pranav - Security Engineer"
+image: "/images/pranav-author.jpg"
+image_alt: "Pranav"
 image_style: "avatar"
 ---
 

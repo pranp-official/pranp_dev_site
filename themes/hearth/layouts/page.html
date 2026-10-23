@@ -17,7 +17,11 @@
     {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
     {{ with $featImg }}
       <figure class="page-feature-media {{ with $imgStyle }}is-{{ . }}{{ end }}">
-        <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" class="page-feature-image" loading="eager">
+        {{ if eq $imgStyle "avatar" }}
+          {{ partial "avatar.html" (dict "src" . "alt" ($.Params.image_alt | default $.Title) "size" 120 "class" "page-feature-image" "loading" "eager") }}
+        {{ else }}
+          <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" class="page-feature-image" loading="eager">
+        {{ end }}
         {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
       </figure>
     {{ end }}

@@ -22,7 +22,7 @@ params:
     name: "Pranav"
     title: "Security Engineer"
     bio: "Security engineer focusing on cloud infrastructure security, identity systems, and zero-trust architectures."
-    image: "/images/author.svg"
+    image: "/images/pranav-author.jpg"
     url: "/"
     github: "https://github.com/pranp-official"
     linkedin: "https://www.linkedin.com/in/pranp"
