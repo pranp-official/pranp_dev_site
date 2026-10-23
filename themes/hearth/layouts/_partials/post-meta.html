@@ -1,0 +1,12 @@
+<p class="meta">
+  {{- if not .Date.IsZero -}}
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  {{- end -}}
+  {{- if and (not .Date.IsZero) (gt .ReadingTime 0) -}} · {{- end -}}
+  {{- if gt .ReadingTime 0 -}}
+    <span>{{ .ReadingTime }} min read</span>
+  {{- end -}}
+  {{- with .Params.tags -}}
+    · <span class="tags">{{ delimit . ", " }}</span>
+  {{- end -}}
+</p>

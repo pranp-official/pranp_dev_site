@@ -1,0 +1,7 @@
+{{ $hasHeadings := gt (len (findRE "<li>" .TableOfContents)) 1 }}
+{{ if and (ne .Params.toc false) $hasHeadings }}
+<nav class="toc" aria-label="On this page">
+  <h2 class="toc-title">On this page</h2>
+  {{ .TableOfContents }}
+</nav>
+{{ end }}

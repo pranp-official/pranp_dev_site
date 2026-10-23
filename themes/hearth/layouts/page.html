@@ -1,0 +1,11 @@
+{{ define "main" }}
+<article class="post">
+  <header class="post-header">
+    {{ partial "post-meta.html" . }}
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+  </header>
+  {{ partial "toc.html" . }}
+  <div class="prose">{{ .Content }}</div>
+</article>
+{{ end }}

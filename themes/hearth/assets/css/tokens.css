@@ -1,0 +1,47 @@
+:root {
+  color-scheme: light dark;
+
+  /* Colour: light-dark(light value, dark value) */
+  --bg:          light-dark(#FAF6EE, #1C1815);
+  --surface:     light-dark(#F3ECDF, #25201C);
+  --text:        light-dark(#2B2118, #EDE4D3);
+  --muted:       light-dark(#6B5B4E, #B3A594);
+  --border:      light-dark(#E2D8C6, #3A332C);
+  --accent:      light-dark(#A3472B, #E0875F);
+
+  /* Code syntax tokens */
+  --code-string: light-dark(#5B6B2E, #B9C97A);
+  --code-func:   light-dark(#7A4B2A, #E8B88A);
+  --code-number: light-dark(#8A5A00, #E3B341);
+
+  /* Type families */
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body:    "Literata", Georgia, serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-ui:      system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid type scale: body is about 18px on phones, 20px on desktop */
+  --step--1: clamp(0.85rem, 0.82rem + 0.15vw, 0.95rem);
+  --step-0:  clamp(1.125rem, 1.08rem + 0.22vw, 1.25rem);
+  --step-1:  clamp(1.35rem, 1.27rem + 0.40vw, 1.60rem);
+  --step-2:  clamp(1.70rem, 1.55rem + 0.75vw, 2.10rem);
+  --step-3:  clamp(2.10rem, 1.85rem + 1.25vw, 2.90rem);
+  --step-4:  clamp(2.60rem, 2.20rem + 2.00vw, 3.80rem);
+
+  /* Reading comfort */
+  --measure: 68ch;
+  --leading: 1.65;
+
+  /* Spacing */
+  --space-xs: 0.5rem;
+  --space-s:  1rem;
+  --space-m:  1.5rem;
+  --space-l:  2.5rem;
+  --space-xl: 4rem;
+
+  --radius: 6px;
+}
+
+/* Manual overrides, set by the toggle in Phase 5 */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark; }

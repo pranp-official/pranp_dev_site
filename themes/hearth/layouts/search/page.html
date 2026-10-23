@@ -1,0 +1,8 @@
+{{ define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+</header>
+<input id="search-input" type="search" autocomplete="off"
+       placeholder="Search posts, notes and projects" aria-label="Search">
+<ul id="search-results" class="post-list" aria-live="polite"></ul>
+{{ end }}

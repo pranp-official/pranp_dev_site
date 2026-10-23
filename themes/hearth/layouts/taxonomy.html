@@ -1,0 +1,13 @@
+{{ define "main" }}
+<header class="page-header">
+  <h1>{{ .Title }}</h1>
+  {{ with .Content }}<div class="lede">{{ . }}</div>{{ end }}
+</header>
+<ul class="post-list">
+  {{ range .Pages }}
+    <li>
+      <a href="{{ .RelPermalink }}">{{ .Title }}</a> ({{ len .Pages }})
+    </li>
+  {{ end }}
+</ul>
+{{ end }}
