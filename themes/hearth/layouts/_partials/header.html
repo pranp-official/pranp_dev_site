@@ -1,5 +1,7 @@
 <header class="site-header">
-  <a class="site-title" href="{{ "/" | relLangURL }}">{{ site.Title }}</a>
+  <a class="site-title site-terminal" href="{{ "/" | relLangURL }}" aria-label="{{ site.Title }} - Home">
+    <span class="terminal-tilde">~</span>pranp
+  </a>
   <nav aria-label="Primary">
     <ul>
       {{ range site.Menus.main }}

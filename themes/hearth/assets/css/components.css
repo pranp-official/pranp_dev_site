@@ -230,7 +230,7 @@
   height: 44px;
   border-radius: 8px;
   object-fit: cover;
-  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  border: 1.5px solid var(--avatar-border);
   background: var(--surface);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
@@ -462,7 +462,7 @@
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  border: 1.5px solid var(--avatar-border);
   background: var(--surface);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
@@ -521,7 +521,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  border: 1.5px solid var(--avatar-border);
   background: var(--surface);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
@@ -561,9 +561,36 @@
 .author-avatar-img {
   border-radius: 50%;
   object-fit: cover;
-  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
+  border: 1.5px solid var(--avatar-border);
   background: var(--surface);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Dark mode avatar edge softening: thin to 1px to prevent irradiation glow */
+@media (prefers-color-scheme: dark) {
+  .intro-image,
+  .page-feature-media.is-avatar .page-feature-image,
+  .post-header.image-style-avatar .page-feature-image,
+  .post-byline-card .byline-avatar,
+  .author-avatar-img {
+    border-width: 1px;
+  }
+}
+
+:root[data-theme="dark"] .intro-image,
+:root[data-theme="dark"] .page-feature-media.is-avatar .page-feature-image,
+:root[data-theme="dark"] .post-header.image-style-avatar .page-feature-image,
+:root[data-theme="dark"] .post-byline-card .byline-avatar,
+:root[data-theme="dark"] .author-avatar-img {
+  border-width: 1px;
+}
+
+:root[data-theme="light"] .intro-image,
+:root[data-theme="light"] .page-feature-media.is-avatar .page-feature-image,
+:root[data-theme="light"] .post-header.image-style-avatar .page-feature-image,
+:root[data-theme="light"] .post-byline-card .byline-avatar,
+:root[data-theme="light"] .author-avatar-img {
+  border-width: 1.5px;
 }
 
 .author-details {
