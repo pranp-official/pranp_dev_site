@@ -230,7 +230,7 @@
   height: 44px;
   border-radius: 8px;
   object-fit: cover;
-  border: 1.5px solid var(--accent);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
   background: var(--surface);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
 }
@@ -462,7 +462,7 @@
   height: 130px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--accent);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
   background: var(--surface);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
@@ -501,7 +501,7 @@
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  border: 2px solid var(--accent);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
   background: var(--surface);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
@@ -541,7 +541,7 @@
 .author-avatar-img {
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--accent);
+  border: 1.5px solid color-mix(in srgb, var(--accent) 55%, var(--border));
   background: var(--surface);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
