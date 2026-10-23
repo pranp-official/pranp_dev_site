@@ -52,7 +52,7 @@
     <div class="post-byline-card">
       {{ with $authorImg }}
         <a href="{{ $authorUrl | relURL }}" class="byline-avatar-link" aria-label="{{ $authorName }}">
-          <img src="{{ . | relURL }}" alt="{{ $authorName }}" class="byline-avatar" width="42" height="42" loading="eager">
+          {{ partial "avatar.html" (dict "src" . "alt" $authorName "size" 44 "class" "byline-avatar" "loading" "eager") }}
         </a>
       {{ end }}
       <div class="byline-content">

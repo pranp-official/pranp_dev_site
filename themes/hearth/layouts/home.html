@@ -7,7 +7,7 @@
   </div>
   {{ with $heroImg }}
     <div class="intro-media">
-      <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default site.Title }}" class="intro-image" width="140" height="140" loading="eager">
+      {{ partial "avatar.html" (dict "src" . "alt" ($.Params.image_alt | default site.Title) "size" 130 "class" "intro-image" "loading" "eager") }}
       {{ with $.Params.image_caption }}<span class="intro-image-caption">{{ . }}</span>{{ end }}
     </div>
   {{ end }}

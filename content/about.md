@@ -1,12 +1,10 @@
 ---
 title: "About"
-description: "Background, security engineering focus, and experience."
-image: "/images/author.svg"
-image_alt: "Pranav - Security Engineer"
+description: "Identity & Cloud Security Engineer, researcher, and Master's student at Georgia Tech."
+image: "/images/pranav-author.png"
+image_alt: "Pranav"
 image_style: "avatar"
 ---
-
-# About Me
 
 **TL;DR:** I am an Identity & Cloud Security Engineer and published researcher (75+ citations) currently pursuing my Master’s in Cybersecurity at **Georgia Tech**. Previously, I spent nearly five years as a Senior Core-Infrastructure Engineer at **Oracle Cloud Infrastructure (OCI)**, designing and scaling core Identity and Access Management (IAM) systems. 
 
