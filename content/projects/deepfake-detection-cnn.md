@@ -23,6 +23,41 @@ The paper has received **17 citations** in multimedia forensics research.
 
 ---
 
+## Detection Pipeline
+
+```mermaid
+flowchart TD
+  subgraph Stage1["1. Face Detection & ROI Extraction"]
+    direction LR
+    Img["<b>Input Image / Video Frame</b><br/>Suspect visual media"] --> Face["<b>Facial Region Alignment</b><br/>Bounding box localization"]
+  end
+
+  subgraph Stage2["2. Generative Artifact Isolation"]
+    direction LR
+    Face --> Seam["<b>Spatial Domain</b><br/>Boundary blending seams"]
+    Face --> Freq["<b>Frequency Domain</b><br/>GAN upsampling checkerboards"]
+  end
+
+  subgraph Stage3["3. Deep Architecture Benchmarking"]
+    direction LR
+    subgraph BranchCustom["Custom CNN Engine"]
+      CNN["<b>Custom Lightweight CNN</b><br/>Low parameter footprint"]
+    end
+    subgraph BranchTransfer["Transfer Learning Engine"]
+      Transfer["<b>Pretrained Deep Backbones</b><br/>ResNet-50 · VGG-16 · InceptionV3"]
+    end
+  end
+
+  subgraph Stage4["4. Forensic Classification"]
+    Classifier{"<b>Detection Head</b><br/>Authenticity probability"}
+    Classifier --> Real["<b>Pristine / Real</b><br/>Natural gradient continuity"]
+    Classifier --> Fake["<b>Manipulated Deepfake</b><br/>Synthetic artifact detected"]
+  end
+
+  Seam & Freq --> BranchCustom & BranchTransfer
+  BranchCustom & BranchTransfer --> Classifier
+```
+
 ## Technical Highlights
 
 ### 1. Forensics of Generative Artifacts

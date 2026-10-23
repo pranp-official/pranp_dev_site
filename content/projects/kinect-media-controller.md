@@ -20,14 +20,24 @@ Developed as part of human-computer interface coursework, this system interfaces
 ## Technical Pipeline
 
 ```mermaid
-flowchart LR
-  Sensor[Kinect Depth & IR Sensor] --> Vitruvius[LightBuzz Vitruvius SDK]
-  Vitruvius --> WPF[C# WPF Client App]
-  WPF --> Classifier[Gesture Recognition: SwipeLeft / SwipeRight]
-  Classifier --> Bridge[Asynchronous Process Dispatcher]
-  Bridge --> Script[Python Automation Script]
-  Script --> HTTP[VLC Web Interface HTTP API]
-  HTTP --> Player[VLC Media Player Instance]
+flowchart TD
+  subgraph Stage1["1. Motion Sensing & Depth Telemetry"]
+    Kinect["<b>Kinect Sensor</b><br/>Depth + IR Video Stream"] --> Vitruvius["<b>Vitruvius SDK</b><br/>3D Joint Keypoints"]
+  end
+
+  subgraph Stage2["2. Gesture Recognition Client"]
+    WPF["<b>C# WPF Application</b><br/>Trajectory Analysis"] --> Detect{"<b>Gesture Match</b>"}
+    Detect -->|"SwipeLeft"| Pause["<b>Action: Pause</b>"]
+    Detect -->|"SwipeRight"| Play["<b>Action: Play</b>"]
+  end
+
+  subgraph Stage3["3. Asynchronous IPC & Playback"]
+    Bridge["<b>Python Dispatcher</b><br/>Async Subprocess"] --> HTTP["<b>VLC HTTP API</b><br/>GET /requests/status.xml"]
+    HTTP --> Player["<b>VLC Media Player</b><br/>State: Playing / Paused"]
+  end
+
+  Vitruvius --> WPF
+  Pause & Play --> Bridge
 ```
 
 ### 1. Skeletal Tracking via Vitruvius

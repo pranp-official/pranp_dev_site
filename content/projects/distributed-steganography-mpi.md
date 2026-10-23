@@ -28,23 +28,26 @@ Published in **Advances in Intelligent Systems and Computing (Springer ICIoTCT 2
 
 ```mermaid
 flowchart TD
-  Secret[Secret Message / Image] --> VC[Visual Cryptography Engine]
-  VC --> Share1[Share 1]
-  VC --> Share2[Share 2]
-  
-  Share1 --> GA[Genetic Algorithm Optimizer]
-  Cover[Cover Image] --> GA
-  
-  subgraph Cluster["Distributed MPI Cluster"]
-    GA --> Master[Master Node: Population Distribution]
-    Master --> W1[Worker Node 1: Fitness Eval]
-    Master --> W2[Worker Node 2: Fitness Eval]
-    Master --> W3[Worker Node 3: Fitness Eval]
+  subgraph Stage1["1. Cryptographic Share Generation"]
+    Secret["<b>Secret Payload</b><br/>Confidential Image / Text"] --> VC["<b>(2, 2) Visual Cryptography</b><br/>Naor-Shamir Threshold Scheme"]
+    VC --> S1["<b>Share 1</b><br/>Noise Matrix"]
+    VC --> S2["<b>Share 2</b><br/>Noise Matrix"]
   end
-  
-  W1 & W2 & W3 --> Agg[Population Selection & Crossover]
-  Agg --> BestGene[Optimal Embedding Chromosome]
-  BestGene --> Stego[LSB Stego-Carrier Output]
+
+  subgraph Stage2["2. Distributed Genetic Algorithm (MPI Cluster)"]
+    Cover["<b>Cover Carrier Image</b><br/>Target Bitmap Container"] --> Master
+    S1 --> Master["<b>Master Node</b><br/>Population Generation & Scattering"]
+    Master -->|"MPI Scatter"| W1["<b>Worker 1</b><br/>PSNR/SSIM Eval"]
+    Master -->|"MPI Scatter"| W2["<b>Worker 2</b><br/>PSNR/SSIM Eval"]
+    Master -->|"MPI Scatter"| W3["<b>Worker 3</b><br/>PSNR/SSIM Eval"]
+    W1 & W2 & W3 -->|"MPI Gather"| Agg["<b>Selection & Crossover</b><br/>Optimal Chromosome Search"]
+  end
+
+  subgraph Stage3["3. Steganographic Carrier Synthesis"]
+    Agg --> BestGene["<b>Optimal Chromosome</b><br/>Target Coordinates"]
+    BestGene --> LSB["<b>LSB Embedding Engine</b><br/>Least Significant Bitplane"]
+    LSB --> Stego["<b>Stego-Carrier Output</b><br/>Perceptually Indistinguishable"]
+  end
 ```
 
 ### 1. Visual Cryptography Splitting

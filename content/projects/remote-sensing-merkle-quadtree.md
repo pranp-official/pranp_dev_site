@@ -21,27 +21,31 @@ This project implements a spatial indexing and change-detection pipeline using a
 
 ```mermaid
 flowchart TD
-  Root["Merkle Root (parent_hash)"]
-  
-  L1A["Quadrant NW"]
-  L1B["Quadrant NE"]
-  L1C["Quadrant SW"]
-  L1D["Quadrant SE"]
-  
-  Root --- L1A
-  Root --- L1B
-  Root --- L1C
-  Root --- L1D
-  
-  L1A --- L2A["Sub-quadrant 1"]
-  L1A --- L2B["Sub-quadrant 2"]
-  L1A --- L2C["Sub-quadrant 3"]
-  L1A --- L2D["Sub-quadrant 4"]
-  
-  L2A --- T1["Leaf Tile 1 (Perceptual + SHA-256)"]
-  L2A --- T2["Leaf Tile 2"]
-  L2A --- T3["Leaf Tile 3"]
-  L2A --- T4["Leaf Tile 4"]
+  subgraph Stage1["1. Spatial Slicing & Hash Computation"]
+    direction LR
+    Img["<b>Satellite Raster</b><br/>Multi-spectral imagery"] --> Slice["<b>image_slicer</b><br/>64 Quadrant Leaf Tiles"]
+    Slice --> Hash["<b>Dual Hashing</b><br/>Perceptual + SHA-256 Digest"]
+  end
+
+  subgraph Stage2["2. Merkle Quadtree Verification Hierarchy"]
+    direction TB
+    Root["<b>Root Digest (parent_hash)</b><br/>Top-Level Region Digest"]
+    Root --> Q1["<b>Quad NW</b><br/>Level 1 Hash"]
+    Root --> Q2["<b>Quad NE</b><br/>Level 1 Hash"]
+    Root --> Q3["<b>Quad SW</b><br/>Level 1 Hash"]
+    Root --> Q4["<b>Quad SE</b><br/>Level 1 Hash"]
+    Q1 -.-> Leaf["<b>Level 3 Leaf Slices</b><br/>64 Sub-tile Hashes"]
+  end
+
+  subgraph Stage3["3. Difference Traversal Algorithm"]
+    direction LR
+    Compare{"<b>Compare Roots</b><br/>Time T0 vs T1"} -->|"Match"| NoDiff["<b>Halt O(1)</b><br/>No change detected"]
+    Compare -->|"Mismatch"| Prune["<b>Branch Traversal</b><br/>Traverse altered subtrees only"]
+    Prune --> Diff["<b>Bounding Box Diff</b><br/>O(log N) change localized"]
+  end
+
+  Hash --> Root
+  Root -.-> Compare
 ```
 
 ### 1. Quadtree Recursive Slicing

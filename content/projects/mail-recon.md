@@ -17,6 +17,31 @@ During the passive reconnaissance phase of a penetration test or security audit,
 
 ---
 
+## OSINT Pipeline
+
+```mermaid
+flowchart TD
+  subgraph Stage1["1. Domain Input & Dork Generation"]
+    direction LR
+    Input["<b>Target Email Pattern</b><br/>e.g., @organization.com"] --> Dork["<b>Google Dork Builder</b><br/>Query formulation"]
+    Dork --> Rotate["<b>Randomized TLD Engine</b><br/>Rotate Google domains & User-Agents"]
+  end
+
+  subgraph Stage2["2. Dual-Engine Web Scraping"]
+    direction LR
+    Rotate --> ScrapeChoice{"<b>Scrape Mode</b>"}
+    ScrapeChoice -->|"Default: -b"| HTTP["<b>Requests + BS4</b><br/>Static HTML endpoint scraping"]
+    ScrapeChoice -->|"Dynamic: -s"| Selenium["<b>Selenium WebDriver</b><br/>Headless Chromium / Gecko"]
+    HTTP & Selenium --> Emails["<b>Extracted Email Pool</b><br/>Pattern validation & deduplication"]
+  end
+
+  subgraph Stage3["3. Breach Auditing & Reporting"]
+    direction LR
+    Emails --> HIBP["<b>HaveIBeenPwned API</b><br/>Breach database correlation"]
+    HIBP --> Reports["<b>Structured Output Reports</b><br/>Raw emails · Breach counts · JSON metadata"]
+  end
+```
+
 ## Technical Highlights
 
 ### 1. Search Engine Dorking & Anti-Bot Evasion

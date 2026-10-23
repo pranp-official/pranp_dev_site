@@ -20,13 +20,25 @@ This project implements an end-to-end computer vision and machine learning pipel
 ## Technical Pipeline
 
 ```mermaid
-flowchart LR
-  Video[Match Video Stream] --> Crop[Temporal & Spatial Cropping]
-  Crop --> OpenPose[OpenPose C++ Inference Engine]
-  OpenPose --> Skeleton[25-Point Body Keypoints JSON]
-  Skeleton --> Features[Biomechanical Feature Extraction]
-  Features --> ML[Model Inference: RF / LSVC / GNB]
-  ML --> Shot[Predicted Shot Category & Analytics]
+flowchart TD
+  subgraph Stage1["1. Video Ingestion & Temporal Trimming"]
+    Raw["<b>Match Video Stream</b><br/>Broadcast / Court Footage"] --> FFmpeg["<b>FFmpeg Ingestion</b><br/>Rally Extraction & Downsampling"]
+  end
+
+  subgraph Stage2["2. Biomechanical Pose Estimation"]
+    OpenPose["<b>OpenPose C++ Engine</b><br/>25-Point Skeletal Keypoints"] --> Kinematics["<b>Kinematic Extraction</b><br/>Joint Angles & Angular Velocity"]
+  end
+
+  subgraph Stage3["3. Classification & Shot Analytics"]
+    Features["<b>Feature Vector Matrix</b><br/>Temporal Coordinate Windows"] --> Models{"<b>Model Suite</b>"}
+    Models --> RF["<b>Random Forest</b><br/>Non-linear Boundaries"]
+    Models --> LSVC["<b>Linear SVC</b><br/>Margin Separation"]
+    Models --> GNB["<b>Gaussian NB</b><br/>Low Latency Baseline"]
+    RF & LSVC & GNB --> Output["<b>Shot Classification</b><br/>Smash · Drop · Drive · Clear"]
+  end
+
+  FFmpeg --> OpenPose
+  Kinematics --> Features
 ```
 
 ### 1. Pose Estimation & Skeletal Tracking

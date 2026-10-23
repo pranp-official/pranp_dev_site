@@ -21,6 +21,41 @@ Presented at the **2022 6th International Conference on Trends in Electronics an
 
 ---
 
+## System Architecture & Benchmarking
+
+```mermaid
+flowchart TD
+  subgraph ClientTier["1. Concurrency Generation & Load Ingestion"]
+    direction LR
+    JMeter["<b>Apache JMeter</b><br/>Simulated concurrent threads"] --> WebApp["<b>Full-Stack Web App</b><br/>REST API Recommendation Service"]
+  end
+
+  subgraph EngineTier["2. Collaborative Filtering Engines"]
+    direction LR
+    subgraph MemoryBased["Memory-Based (KNN)"]
+      KNN["<b>User / Item KNN</b><br/>Cosine & Pearson similarity"]
+    end
+    subgraph ModelBased["Model-Based (SVD)"]
+      SVD["<b>Matrix Factorization</b><br/>Latent feature projection"]
+    end
+  end
+
+  subgraph DataTier["3. Persistence & Database Benchmarking"]
+    direction LR
+    Sysbench["<b>Sysbench Engine</b><br/>Transaction stress suite"] --> DB[("<b>Relational Database</b><br/>User-item interaction matrix")]
+  end
+
+  subgraph MetricsTier["4. Empirical Trade-Off Evaluation"]
+    direction LR
+    Acc["<b>Accuracy Metrics</b><br/>RMSE · MAE · Precision@K"]
+    Perf["<b>System Metrics</b><br/>Thread saturation · Latency · I/O wait"]
+  end
+
+  WebApp --> MemoryBased & ModelBased
+  MemoryBased & ModelBased --> DB
+  DB & WebApp --> MetricsTier
+```
+
 ## Technical Highlights
 
 ### 1. Collaborative Filtering Architectures

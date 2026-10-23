@@ -17,6 +17,37 @@ Network exploration tools like Nmap are powerful, but enterprise and air-gapped 
 
 ---
 
+## Scanning Architecture
+
+```mermaid
+flowchart TD
+  subgraph Stage1["1. CLI Argument Parsing"]
+    direction LR
+    CLI["<b>Target Specification</b><br/>IPs & port arguments"] --> Parser["<b>Argparse Engine</b><br/>Extract mode flags"]
+  end
+
+  subgraph Stage2["2. Scan Modalities"]
+    direction LR
+    Parser --> Mode{"<b>Dispatch Mode</b>"}
+    Mode -->|"Simple: -s"| Single["<b>Single Port Probe</b><br/>Specific port verification"]
+    Mode -->|"Multi: -m"| Multi["<b>Port List Sweep</b><br/>Known services: 22, 80, 443..."]
+    Mode -->|"Range: -r"| Range["<b>Range Enumerator</b><br/>Contiguous port block"]
+  end
+
+  subgraph Stage3["3. Socket Probe & Handshake"]
+    direction LR
+    Single & Multi & Range --> Socket["<b>BSD Socket Layer</b><br/>AF_INET, SOCK_STREAM"]
+    Socket --> TCP["<b>TCP 3-Way Handshake</b><br/>Configurable connection timeout"]
+  end
+
+  subgraph Stage4["4. State Classification & Output"]
+    direction LR
+    TCP --> Result{"<b>connect() State</b>"}
+    Result -->|"Success"| Open["<b>Open Port Detected</b><br/>Active listening daemon"]
+    Result -->|"Timeout / Refused"| Closed["<b>Closed / Filtered</b><br/>Host unreachable or silent drop"]
+  end
+```
+
 ## Capabilities & Implementation
 
 ### 1. Zero-Dependency Socket Architecture

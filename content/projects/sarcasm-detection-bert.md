@@ -25,6 +25,40 @@ The paper has garnered **56+ citations** across computational linguistics and af
 
 ---
 
+## Technical Pipeline
+
+```mermaid
+flowchart TD
+  subgraph Stage1["1. Conversational Dialogue Input"]
+    Parent["<b>Parent Tweet / Context</b><br/>Preceding conversational turn"]
+    Response["<b>Target Response Tweet</b><br/>Utterance to classify"]
+  end
+
+  subgraph Stage2["2. Social Media Preprocessing"]
+    Norm["<b>Entropy Normalizer</b><br/>Slang expansion · Emojis · URLs"]
+  end
+
+  subgraph Stage3["3. Dual Embedding Architectures"]
+    direction LR
+    subgraph BranchBERT["Contextual Paradigm"]
+      BERT["<b>BERT (bert-base-uncased)</b><br/>Bidirectional dynamic self-attention"]
+    end
+    subgraph BranchGloVe["Static Paradigm"]
+      GloVe["<b>GloVe 300D Twitter</b><br/>Global co-occurrence matrix"]
+    end
+  end
+
+  subgraph Stage4["4. Incongruity Scoring & Classification"]
+    Classifier{"<b>Classifier Head</b><br/>Pragmatic contrast scoring"}
+    Classifier --> Sarcastic["<b>Sarcastic</b><br/>Contextual tone clash"]
+    Classifier --> NonSarcastic["<b>Non-Sarcastic</b><br/>Literal sentiment alignment"]
+  end
+
+  Parent & Response --> Norm
+  Norm --> BranchBERT & BranchGloVe
+  BranchBERT & BranchGloVe --> Classifier
+```
+
 ## Technical Highlights
 
 ### 1. Conversational Context Modeling

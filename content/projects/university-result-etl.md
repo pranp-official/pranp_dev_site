@@ -17,12 +17,21 @@ This project engineered a "zero-touch" automated ETL pipeline that ingests raw e
 ## Architecture & Data Flow
 
 ```mermaid
-flowchart LR
-  PDF[Raw Exam PDF Gazettes] --> Extractor[PDF Parser & OCR Cleanser]
-  Extractor --> Normalizer[Data Normalization & SGPA Validator]
-  Normalizer --> JSON[Structured JSON Event Records]
-  JSON --> ES[Elasticsearch Sharded Cluster]
-  ES --> Kibana[Interactive Kibana Dashboards]
+flowchart TD
+  subgraph Stage1["1. Raw Document Ingestion & Extraction"]
+    PDF["<b>Raw Exam Gazettes</b><br/>Semi-structured PDF releases"] --> Parser["<b>Python PDF Parser</b><br/>Tabular & OCR Cleanser"]
+  end
+
+  subgraph Stage2["2. Data Normalization & Validation"]
+    Parser --> Normalizer["<b>Schema Normalizer</b><br/>Letter Grades to Grade Points"]
+    Normalizer --> Calc["<b>Metric Calculator</b><br/>SGPA, CGPA & Backlog Flags"]
+    Calc --> JSON["<b>JSON Event Documents</b><br/>Validated Schema Records"]
+  end
+
+  subgraph Stage3["3. Search Indexing & Visualization"]
+    JSON --> ES["<b>Elasticsearch Cluster</b><br/>Sharded Indices by Batch/Branch"]
+    ES --> Kibana["<b>Kibana Dashboards</b><br/>Bell Curves · GPA Distributions · Pass Rates"]
+  end
 ```
 
 ### 1. Ingestion & Tabular PDF Extraction

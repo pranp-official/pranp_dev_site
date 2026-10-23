@@ -232,11 +232,22 @@
 
 /* Mermaid diagrams */
 .mermaid {
-  background: transparent;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-m);
+  margin: var(--space-m) 0 var(--space-l);
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow-x: auto;
-  padding: var(--space-m) 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.mermaid svg {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
 }
 
 /* Post eyebrow kicker (Slack Engineering style: date and reading time placed above title) */
