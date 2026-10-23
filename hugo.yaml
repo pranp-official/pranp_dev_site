@@ -20,8 +20,8 @@ params:
   description: "Notes on cloud security and identity"
   author:
     name: "Pranav"
-    title: "Security Engineer"
-    bio: "Security engineer focusing on cloud infrastructure security, identity systems, and zero-trust architectures."
+    title: "M.S. in Cybersecurity | Georgia Tech"
+    bio: "Student focusing on cloud infrastructure security, identity systems, and zero-trust architectures."
     image: "/images/pranav-author.png"
     url: "/"
     github: "https://github.com/pranp-official"
