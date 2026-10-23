@@ -3,4 +3,4 @@ title: "Pranav"
 image: "/images/author.svg"
 image_alt: "Pranav - Security Engineer"
 ---
-I am a security engineer focusing on cloud infrastructure security, identity systems, and zero-trust architectures. Here you will find essays on security design patterns, notes from the field, and open-source tools I build.
+Hi, I’m Pranav. I'm a Master’s student in Cybersecurity at Georgia Tech and a former Senior Developer at Oracle Cloud Infrastructure's IAM & Identity Cloud Services team. I build and write about distributed authorization, applied cryptography, workload identity, and trust boundaries for autonomous AI agents.
