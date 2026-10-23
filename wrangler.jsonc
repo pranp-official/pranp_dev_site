@@ -5,6 +5,7 @@
     "command": "hugo --gc --minify"
   },
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "not_found_handling": "404-page"
   }
 }

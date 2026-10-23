@@ -1,0 +1,16 @@
+{{ $parts := slice }}
+{{ range slice "js/theme.js" "js/copy.js" "js/search.js" }}
+  {{ with resources.Get . }}{{ $parts = $parts | append . }}{{ end }}
+{{ end }}
+{{ $js := $parts | resources.Concat "js/hearth.js" | resources.Minify | resources.Fingerprint }}
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ if .Store.Get "hasMermaid" }}
+<script src="{{ "js/mermaid.min.js" | relURL }}"></script>
+<script>
+  (function () {
+    var forced = document.documentElement.getAttribute("data-theme");
+    var dark = forced ? forced === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+    mermaid.initialize({ startOnLoad: true, theme: dark ? "dark" : "neutral" });
+  })();
+</script>
+{{ end }}

@@ -1,0 +1,5 @@
+<article class="card">
+  {{ partial "post-meta.html" . }}
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+  <p>{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 140 }}{{ end }}</p>
+</article>

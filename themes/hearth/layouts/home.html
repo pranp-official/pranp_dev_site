@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="intro">
+  <h1>{{ site.Title }}</h1>
+  {{ .Content }}
+</section>
+
+<section class="recent">
+  <h2>Recent writing</h2>
+  <div class="card-grid">
+    {{ range first 6 ((where site.RegularPages "Section" "blog").ByDate.Reverse) }}
+      {{ partial "card.html" . }}
+    {{ end }}
+  </div>
+  <p><a href="{{ "blog/" | relLangURL }}">All posts</a></p>
+</section>
+{{ end }}

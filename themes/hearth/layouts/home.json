@@ -1,0 +1,9 @@
+{{- $out := slice -}}
+{{- range where site.RegularPages "Section" "in" (slice "blog" "notes" "projects") -}}
+  {{- $out = $out | append (dict
+    "title" .Title
+    "url" .RelPermalink
+    "summary" (.Summary | plainify | truncate 200)
+    "content" (.Plain | truncate 4000)) -}}
+{{- end -}}
+{{- $out | jsonify -}}
