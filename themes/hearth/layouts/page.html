@@ -55,7 +55,7 @@
   {{ end }}
   {{ if ne .Section "" }}
     <footer class="post-footer">
-      <p class="back-link"><a href="{{ if eq .Section "blog" }}{{ "blog/" | relLangURL }}{{ else if eq .Section "notes" }}{{ "notes/" | relLangURL }}{{ else }}{{ "/" | relLangURL }}{{ end }}">← Back to {{ if eq .Section "blog" }}all posts{{ else if eq .Section "notes" }}all notes{{ else }}home{{ end }}</a></p>
+      <p class="back-link"><a href="{{ if eq .Section "blog" }}{{ "blog/" | relLangURL }}{{ else if eq .Section "notes" }}{{ "notes/" | relLangURL }}{{ else if eq .Section "projects" }}{{ "projects/" | relLangURL }}{{ else }}{{ "/" | relLangURL }}{{ end }}">← Back to {{ if eq .Section "blog" }}all posts{{ else if eq .Section "notes" }}all notes{{ else if eq .Section "projects" }}all work{{ else }}home{{ end }}</a></p>
     </footer>
   {{ end }}
 </article>

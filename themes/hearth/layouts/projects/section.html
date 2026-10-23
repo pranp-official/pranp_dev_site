@@ -4,17 +4,25 @@
   {{ with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
 </header>
 <div class="card-grid">
-  {{ range .Pages }}
+  {{ range .Pages.ByDate.Reverse }}
     <article class="card">
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <p>{{ .Description }}</p>
-      {{ with .Params.links }}
-        <p class="links">
-          {{ range . }}
-            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>{{ " " }}
-          {{ end }}
-        </p>
+      {{ if .Params.venue }}
+        <p class="card-eyebrow">{{ .Params.venue }}{{ with .Params.citations }} · <strong>{{ . }} Citations</strong>{{ end }}</p>
+      {{ else }}
+        {{ with .Params.tags }}
+          <p class="card-eyebrow">{{ delimit (first 2 .) " · " | upper }}</p>
+        {{ end }}
       {{ end }}
+      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+      <p class="card-desc">{{ .Description }}</p>
+      <div class="links">
+        {{ with .Params.links }}
+          {{ range . }}
+            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }} ↗</a>{{ " " }}
+          {{ end }}
+        {{ end }}
+        <a href="{{ .RelPermalink }}" class="card-detail-link">Overview →</a>
+      </div>
     </article>
   {{ end }}
 </div>

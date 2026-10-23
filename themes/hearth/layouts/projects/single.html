@@ -1,0 +1,64 @@
+{{ define "main" }}
+{{ $hasShare := ne .Params.share false }}
+<article class="post {{ if $hasShare }}has-share-rail{{ end }}">
+  <header class="post-header">
+    <p class="post-eyebrow">
+      {{ with .Params.venue }}
+        <span>{{ . }}</span>
+        {{ with $.Params.citations }}
+          <span class="eyebrow-sep" aria-hidden="true">•</span>
+          <span>{{ . }} CITATIONS</span>
+        {{ end }}
+      {{ else }}
+        {{ with .Params.tags }}
+          <span>{{ delimit (first 2 .) " / " | upper }}</span>
+        {{ else }}
+          <span>PROJECT</span>
+        {{ end }}
+      {{ end }}
+      {{ if not .Date.IsZero }}
+        <span class="eyebrow-sep" aria-hidden="true">•</span>
+        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006" }}</time>
+      {{ end }}
+    </p>
+
+    <h1>{{ .Title }}</h1>
+    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+
+    {{ if or .Params.authors .Params.doi .Params.links }}
+      <div class="project-header-meta">
+        {{ with .Params.authors }}
+          <p class="project-authors"><strong>Authors:</strong> {{ delimit . ", " }}</p>
+        {{ end }}
+        {{ with .Params.doi }}
+          <p class="project-doi"><strong>DOI:</strong> <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a></p>
+        {{ end }}
+        {{ with .Params.links }}
+          <div class="project-links-bar">
+            {{ range . }}
+              <a href="{{ .url }}" class="project-btn" target="_blank" rel="noopener noreferrer">
+                {{ .label }}
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+              </a>
+            {{ end }}
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+
+    {{ partial "post-meta.html" (dict "page" . "showAuthor" false "hideTags" false) }}
+  </header>
+
+  {{ if $hasShare }}
+    {{ partial "share-rail.html" . }}
+  {{ end }}
+
+  {{ partial "toc.html" . }}
+
+  <div class="prose">{{ .Content }}</div>
+
+  <footer class="post-footer">
+    <p class="back-link"><a href="{{ "projects/" | relLangURL }}">← Back to all work</a></p>
+  </footer>
+</article>
+{{ end }}
