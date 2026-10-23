@@ -1,9 +1,11 @@
 {{ $p := . }}
 {{ $showAuthor := false }}
+{{ $hideTags := false }}
 {{ if reflect.IsMap . }}
   {{ if isset . "page" }}
     {{ $p = .page }}
     {{ $showAuthor = .showAuthor | default false }}
+    {{ $hideTags = .hideTags | default false }}
   {{ end }}
 {{ end }}
 
@@ -91,9 +93,11 @@
           <span>{{ $p.ReadingTime }} min read</span>
         {{ end }}
       {{ end }}
-      {{ with $p.Params.tags }}
-        {{ if and (not $showAuthor) $hasDate }}<span class="meta-sep">·</span>{{ end }}
-        <span class="tags">{{ delimit . ", " }}</span>
+      {{ if not $hideTags }}
+        {{ with $p.Params.tags }}
+          {{ if and (not $showAuthor) $hasDate }}<span class="meta-sep">·</span>{{ end }}
+          <span class="tags">{{ delimit . ", " }}</span>
+        {{ end }}
       {{ end }}
     </p>
   {{ end }}
