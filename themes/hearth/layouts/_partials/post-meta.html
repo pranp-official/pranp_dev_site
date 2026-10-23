@@ -72,16 +72,9 @@
           {{ end }}
         </div>
         <div class="byline-secondary">
-          {{ with $authorTitle }}<span class="byline-title">{{ . }}</span><span class="meta-sep">·</span>{{ end }}
-          {{ if $hasDate }}
-            <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
-          {{ end }}
-          {{ if and $hasDate (gt $p.ReadingTime 0) }}
-            <span class="meta-sep">·</span>
-            <span>{{ $p.ReadingTime }} min read</span>
-          {{ end }}
+          {{ with $authorTitle }}<span class="byline-title">{{ . }}</span>{{ end }}
           {{ with $p.Params.tags }}
-            <span class="meta-sep">·</span>
+            {{ if $authorTitle }}<span class="meta-sep">·</span>{{ end }}
             <span class="tags">{{ delimit . ", " }}</span>
           {{ end }}
         </div>
@@ -89,15 +82,17 @@
     </div>
   {{ else }}
     <p class="meta">
-      {{ if $hasDate }}
-        <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
-      {{ end }}
-      {{ if and $hasDate (gt $p.ReadingTime 0) }}
-        <span class="meta-sep">·</span>
-        <span>{{ $p.ReadingTime }} min read</span>
+      {{ if not $showAuthor }}
+        {{ if $hasDate }}
+          <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
+        {{ end }}
+        {{ if and $hasDate (gt $p.ReadingTime 0) }}
+          <span class="meta-sep">·</span>
+          <span>{{ $p.ReadingTime }} min read</span>
+        {{ end }}
       {{ end }}
       {{ with $p.Params.tags }}
-        <span class="meta-sep">·</span>
+        {{ if and (not $showAuthor) $hasDate }}<span class="meta-sep">·</span>{{ end }}
         <span class="tags">{{ delimit . ", " }}</span>
       {{ end }}
     </p>
