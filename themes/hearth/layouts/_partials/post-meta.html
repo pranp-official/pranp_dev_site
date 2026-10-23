@@ -1,12 +1,59 @@
+{{ $p := . }}
+{{ $showAuthor := false }}
+{{ if reflect.IsMap . }}
+  {{ if isset . "page" }}
+    {{ $p = .page }}
+    {{ $showAuthor = .showAuthor | default false }}
+  {{ end }}
+{{ end }}
+
+{{/* Only display metadata on content sections (e.g. blog, notes) or if date is set */}}
+{{ $isArticle := and (ne $p.Section "") (ne $p.Params.author false) }}
+{{ $hasDate := not $p.Date.IsZero }}
+{{ $hasTags := and $p.Params.tags (gt (len $p.Params.tags) 0) }}
+{{ $hasDetails := or $hasDate $hasTags }}
+
+{{ $authorName := "" }}
+{{ $authorImg := "" }}
+{{ if and $showAuthor $isArticle }}
+  {{ if reflect.IsMap $p.Params.author }}
+    {{ $authorName = $p.Params.author.name }}
+    {{ $authorImg = $p.Params.author.image }}
+  {{ else if $p.Params.author }}
+    {{ $authorName = $p.Params.author }}
+  {{ end }}
+
+  {{ if not $authorName }}
+    {{ if reflect.IsMap site.Params.author }}
+      {{ $authorName = site.Params.author.name }}
+      {{ $authorImg = site.Params.author.image }}
+    {{ else }}
+      {{ $authorName = site.Params.author | default site.Title }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if or $authorName $hasDetails }}
 <p class="meta">
-  {{- if not .Date.IsZero -}}
-    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+  {{- if $authorName -}}
+    <span class="byline">
+      {{- with $authorImg -}}
+        <img src="{{ . | relURL }}" alt="{{ $authorName }}" class="byline-avatar" width="22" height="22" loading="eager">
+      {{- end -}}
+      <span class="byline-name">{{ $authorName }}</span>
+    </span>
+    {{- if $hasDetails -}}<span class="meta-sep">·</span>{{- end -}}
   {{- end -}}
-  {{- if and (not .Date.IsZero) (gt .ReadingTime 0) -}} · {{- end -}}
-  {{- if gt .ReadingTime 0 -}}
-    <span>{{ .ReadingTime }} min read</span>
+  {{- if $hasDate -}}
+    <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
+    {{- if gt $p.ReadingTime 0 -}}
+      <span class="meta-sep">·</span>
+      <span>{{ $p.ReadingTime }} min read</span>
+    {{- end -}}
   {{- end -}}
-  {{- with .Params.tags -}}
-    · <span class="tags">{{ delimit . ", " }}</span>
+  {{- if $hasTags -}}
+    {{- if $hasDate -}}<span class="meta-sep">·</span>{{- end -}}
+    <span class="tags">{{ delimit $p.Params.tags ", " }}</span>
   {{- end -}}
 </p>
+{{ end }}

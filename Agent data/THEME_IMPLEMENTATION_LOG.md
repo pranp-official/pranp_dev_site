@@ -110,6 +110,14 @@ This document records the architectural decisions, progress, and verification ch
   * Provided vector `favicon.svg` with embedded `@media (prefers-color-scheme: dark)` styling for dynamic browser tab light/dark theme adaptation.
   * Generated multi-resolution `favicon.ico` (16x16, 32x32, 48x48), `favicon-32x32.png`, `favicon-16x16.png`, and `apple-touch-icon.png` (180x180).
   * Added `site.webmanifest` and configured `<meta name="theme-color">` for light and dark browser chrome in `_partials/head.html`.
+- [x] **Phase 12**: Author Box & Optional Media Architecture
+  * Added optional hero/avatar image support for landing page (`home.html`, `content/_index.md`).
+  * Added optional featured media & profile image support for About and standard pages (`page.html`, `content/about.md`).
+  * Configured centralized `author` metadata in `hugo.yaml` with support for per-page frontmatter overrides.
+  * Added author byline with avatar in `_partials/post-meta.html` for single articles.
+  * Implemented semantic `<aside class="author-box">` colophon at the end of essays and notes with avatar, bio, and social links.
+  * Created scalable default author avatar vector art in `static/images/author.svg`.
+
 
 
 ---
