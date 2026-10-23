@@ -3,7 +3,6 @@
 {{ $imgStyle := .Params.image_style | default "" }}
 <article class="post">
   <header class="post-header {{ with $featImg }}has-image{{ end }} {{ with $imgStyle }}image-style-{{ . }}{{ end }}">
-    {{ partial "post-meta.html" (dict "page" . "showAuthor" true) }}
     <h1>{{ .Title }}</h1>
     {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
     {{ with $featImg }}
@@ -12,6 +11,7 @@
         {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
       </figure>
     {{ end }}
+    {{ partial "post-meta.html" (dict "page" . "showAuthor" true) }}
   </header>
   {{ partial "toc.html" . }}
   <div class="prose">{{ .Content }}</div>
