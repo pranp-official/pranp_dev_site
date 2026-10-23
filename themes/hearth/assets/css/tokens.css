@@ -8,6 +8,10 @@
   --muted:       light-dark(#6B5B4E, #B3A594);
   --border:      light-dark(#E2D8C6, #3A332C);
   --accent:      light-dark(#A3472B, #E0875F);
+  --avatar-border: light-dark(
+    color-mix(in srgb, var(--accent) 55%, var(--border)),
+    color-mix(in srgb, var(--accent) 28%, var(--border))
+  );
 
   /* Code syntax tokens */
   --code-string: light-dark(#5B6B2E, #B9C97A);
