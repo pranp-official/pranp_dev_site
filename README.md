@@ -1,156 +1,145 @@
 # pranp.dev
 
-The personal engineering publication and portfolio of **Pranav** ([pranp.dev](https://www.pranp.dev/)), focusing on cloud security architecture, identity systems (IAM), zero-trust engineering, and distributed systems.
+The personal publication and engineering notebook of **Pranav** ([pranp.dev](https://www.pranp.dev/)), covering cloud infrastructure security, identity systems (IAM), ephemeral credentials, and zero-trust systems.
 
-Built with [Hugo](https://gohugo.io/) and powered by a bespoke, high-performance custom theme: **Hearth** (`themes/hearth/`).
-
----
-
-## The Hearth Theme: Architectural Innovations
-
-**Hearth** is a custom Hugo theme designed from the ground up as a rejection of modern web bloat. It requires **no Tailwind, no Node.js/npm dependencies, and no JavaScript framework runtime**. Every feature is implemented using native W3C web standards and Hugo's native asset pipeline (Hugo Pipes).
-
-### 1. Zero-Dependency Vanilla Modernism
-* **Build Time**: Compiles the entire 50+ page site and fingerprinted asset bundles in **~14 milliseconds**.
-* **Zero Dependency Rot**: No `package.json`, no `node_modules`, and no webpack/Vite configuration that breaks across major updates. A single `hugo` binary is the only build dependency.
-* **Asset Pipeline**: CSS and JS are concatenated, minified, and fingerprinted using cryptographic Subresource Integrity (SRI) hashes directly within Hugo Pipes.
-
-### 2. Modern Native Color Theming (`light-dark()`)
-* **Standard-Based Color Switching**: Hearth does not duplicate CSS rules under bulky `.dark-mode` selectors. It leverages the modern CSS `light-dark()` function directly on `:root`:
-  ```css
-  :root {
-    color-scheme: light dark;
-    --bg:      light-dark(#FAF6EE, #1C1815);
-    --surface: light-dark(#F3ECDF, #25201C);
-    --text:    light-dark(#2B2118, #EDE4D3);
-    --muted:   light-dark(#6B5B4E, #B3A594);
-    --accent:  light-dark(#A3472B, #E0875F);
-  }
-  :root[data-theme="light"] { color-scheme: light; }
-  :root[data-theme="dark"]  { color-scheme: dark; }
-  ```
-* **Instant Cascade**: Toggling themes simply updates the `:root[data-theme]` attribute, allowing the browser's rendering engine to re-evaluate all variables natively.
-* **WCAG 2.1 AA/AAA Contrast**: All palette pairings maintain strict contrast ratios (from 5.4:1 to 14.6:1) against both light warm parchment and deep dark ink backgrounds.
-
-### 3. Elimination of Flash of Unstyled Content (FOUC)
-* A synchronous, microscopic inline script (`theme-init.html`) executes in `<head>` before the DOM renders. It evaluates `localStorage` and system `prefers-color-scheme` preferences, setting the appropriate theme attribute immediately and preventing jarring page flashes.
-
-### 4. Classical Long-Form Editorial Typography
-* **Type Hierarchy**:
-  * **Headings**: *Fraunces Variable* (a humanist, warm display serif with soft old-style character).
-  * **Body Copy**: *Literata Variable* (commissioned specifically for comfortable, extended screen reading).
-  * **Code**: *JetBrains Mono* (engineered for legibility and symbol distinction).
-* **Self-Hosted & Preloaded**: All fonts are delivered as local `.woff2` variable font files (~36 KB – 111 KB) with `<link rel="preload">` tags in `<head>`, eliminating external CDN connections (e.g., Google Fonts) and preventing layout shifts (CLS).
-* **Typographic Rhythm**:
-  * Fluid scaling via CSS `clamp()` (`--step--1` to `--step-4`).
-  * Enforced measure: `--measure: 68ch` (optimal line length) and line height `--leading: 1.65`.
-  * `text-wrap: balance` on headings to avoid typographic orphans.
-  * `text-wrap: pretty` on body copy for polished paragraph breaks.
-
-### 5. Built-in Privacy & Performance Features
-* **Dynamic Cryptographic Favicon Suite**: An adaptive SVG favicon featuring a serif **"P"** with an embedded **keyhole counter** (representing Identity & Access Management). Using `@media (prefers-color-scheme: dark)`, the tab icon changes color dynamically when the browser switches themes. Fallback multi-resolution PNGs and `.ico` are generated with sub-pixel anti-aliasing.
-* **Defensive Client-Side Search**: Client-side full-text search reads `/index.json`, dynamically loaded only when the search input receives focus. All DOM updates are built using `textContent` and `document.createElement`, providing complete immunity against DOM-based XSS attacks.
-* **Smart Conditional Mermaid Runtime**: Mermaid diagram support (`render-codeblock-mermaid.html`) flags Hugo's page store. The ~3 MB Mermaid runtime script is **only loaded** on pages containing actual diagrams.
-* **Accessible Code Copy**: Pure vanilla JavaScript clipboard utility attached to `.prose pre` blocks with keyboard accessibility and ARIA status updates.
-* **Sticky Table of Contents**: Automatically calculates heading depth; renders a desktop-sticky 2-column TOC only when an article contains more than one heading.
+Powered by [Hugo](https://gohugo.io/) and rendered through a bespoke custom theme: **Hearth** (`themes/hearth/`).
 
 ---
 
-## Directory Structure
+## The Hearth Theme: Inspiration & Design Philosophy
 
-The repository maintains a strict separation of concerns between site-specific content/configuration and the reusable theme engine:
+Most modern engineering sites look and feel like SaaS dashboards: stark `#FFFFFF` backgrounds, neon blue links, generic sans-serif typefaces (Inter, Roboto), and harsh `#000000` AMOLED dark modes that cause intense eye fatigue.
+
+**Hearth** was created as a deliberate counter-movement to this trend. It is inspired by **printed literary quarterlies, classical book typography, and physical editorial publications**.
+
+### 1. Why It Looks This Way: Built for Deep Reading
+Security architecture, distributed systems design, and cryptographic protocol essays are not quick tweets or API reference sheets—they are long, dense, conceptual essays that require focus.
+
+Hearth was built around the experience of **reading a physical printed book by the fireside**:
+* **Calm, Grounded Atmosphere**: No distracting animations, glowing drop shadows, noisy gradients, or ornamental textures.
+* **Respect for the Reader's Eyes**: Zero pure white (`#FFF`) and zero pure black (`#000`). Contrast is calibrated for soft, prolonged readability without eye strain.
+* **Warmth Over Cold Utilitarianism**: Rather than feeling like a sterile code repository, it feels like an author's private reading study.
+
+---
+
+## Visual Anatomy & Aesthetics
+
+### The "Warm Paper" Palette
+The color system reflects natural materials: aged paper, roasted ink, warm stone, and terracotta clay.
+
+| Element | Light Mode ("Warm Paper") | Dark Mode ("Charred Hearth") | Intent & Contrast |
+| :--- | :--- | :--- | :--- |
+| **Background (`--bg`)** | `#FAF6EE` *(Warm Parchment)* | `#1C1815` *(Charred Ink)* | Soft, low-strain canvas; avoids blinding white or void black. |
+| **Surface (`--surface`)** | `#F3ECDF` *(Card & Badge)* | `#25201C` *(Card & Badge)* | Subtle depth step for cards and code blocks. |
+| **Primary Text (`--text`)** | `#2B2118` *(Deep Roasted Ink)* | `#EDE4D3` *(Warm Cream)* | High-contrast, tactile reading ink (14.6:1 light / 14.0:1 dark). |
+| **Muted Meta (`--muted`)** | `#6B5B4E` *(Warm Umber)* | `#B3A594` *(Soft Sand)* | Dates, reading times, and secondary metadata (6.0:1 light / 7.3:1 dark). |
+| **Accent & Links (`--accent`)** | `#A3472B` *(Terracotta)* | `#E0875F` *(Soft Ember)* | Earthy red-orange warmth with guaranteed WCAG AA/AAA legibility (5.6:1 light / 6.5:1 dark). |
+| **Borders (`--border`)** | `#E2D8C6` *(Stone Gray)* | `#3A332C` *(Deep Umber)* | Whisper-soft dividers that organize without visual clutter. |
+
+### The Dual-Serif Typographic System
+The core voice of Hearth is carried entirely by its typefaces:
+
+* **Display Headings: *Fraunces Variable***  
+  An old-style humanist serif full of organic warmth, soft curves, and distinctive teardrop terminals. It gives titles an authorial, bookish presence that immediately sets the tone.
+* **Body Text: *Literata Variable***  
+  Originally commissioned by Google Books specifically for long-form reading on digital displays. Literata features generous x-heights, open counters, and horizontal flow that makes multi-page architectural essays comfortable to read.
+* **Code Blocks: *JetBrains Mono***  
+  A clean, utilitarian monospaced face designed for developer legibility. It ensures IAM JSON policies, Go code blocks, and terminal commands are unmistakably distinct.
+
+### Classical Editorial Reading Geometry
+Layout rules follow classical book design principles (drawing from Robert Bringhurst's *The Elements of Typographic Style*):
+* **The Golden Measure (`--measure: 68ch`)**: Article line lengths are locked to ~65–70 characters per line. Lines that are too long tire the eye; lines that are too short break reading cadence.
+* **Generous Leading (`--leading: 1.65`)**: Vertical line spacing is spaced generously to allow the eye to track effortlessly between paragraphs.
+* **Modern Optical Polish**: Headings use CSS `text-wrap: balance` to eliminate awkward orphaned words, while paragraphs use `text-wrap: pretty` for clean, professional typographic rag.
+* **Fluid `clamp()` Scale**: Typography scales smoothly between mobile phones and 4K desktop screens without jagged media-query jumps.
+
+---
+
+## The Identity: Cryptographic Keyhole Monogram
+
+The browser tab icon (favicon) reflects the intersection of **personal identity** and **security engineering**:
+* **The Glyph**: An architectural serif lettermark **"P"** (drawing from Fraunces), with its inner counter carved into a subtle **cryptographic keyhole**.
+* **The Message**: Represents Pranav (`pranp.dev`) while honoring your engineering specialization in **Identity & Access Management (IAM), passkeys, workload federation, and zero-trust credentials**.
+* **Dynamic Theme Awareness**: Delivered as a vector SVG that listens to `@media (prefers-color-scheme: dark)`:
+  * In Light Mode: Terracotta badge with warm parchment letter and keyhole cutout.
+  * In Dark Mode: Soft ember badge with deep ink letter and keyhole cutout.
+
+---
+
+## Architectural Underpinnings
+
+While Hearth is designed to look like a classical literary print, its underlying architecture is built on modern, ultra-fast web standards:
+
+* **Zero-Dependency Vanilla Modernism**: Strictly no Tailwind, no npm, and no JavaScript framework runtime. A single `hugo` binary compiles the entire 50+ page site in **~14 milliseconds**.
+* **Native CSS `light-dark()` Engine**: Theming is handled via the native W3C `light-dark()` function directly on `:root`. A manual toggle flips `:root[data-theme]`, triggering a native browser cascade without duplicate CSS selectors.
+* **Anti-FOUC (Flash of Unstyled Content)**: A synchronous inline `<head>` script detects `localStorage` and system preferences before initial paint, preventing any jarring white or black flashes.
+* **Self-Hosted Variable Fonts**: All WOFF2 variable fonts are self-hosted locally and preloaded with `<link rel="preload">`, avoiding external Google Font network latency and privacy leaks.
+* **Selective Runtime Loading**: Heavy client-side runtimes like Mermaid diagrams (~3 MB) are only loaded on pages that explicitly contain diagram code blocks.
+* **Defensive Client-Side Search**: Client-side search queries a lazy-loaded `/index.json` using pure `textContent` DOM nodes, making the search interface completely immune to DOM-based XSS.
+
+---
+
+## Repository Structure
 
 ```text
 pranp_dev_site/
-├── hugo.yaml                            # Site configuration (menus, output formats, metadata)
-├── wrangler.jsonc                       # Cloudflare Workers / Pages deployment manifest
-├── archetypes/                          # Frontmatter content blueprints (blog, notes, projects)
-├── content/                             # Markdown content sources
+├── hugo.yaml                            # Site configuration (menus, outputs, markup)
+├── wrangler.jsonc                       # Cloudflare Workers / Pages deployment config
+├── archetypes/                          # Frontmatter templates (blog, notes, projects)
+├── content/                             # Markdown source content
 │   ├── _index.md                        # Homepage hero and bio
-│   ├── about.md                         # Author biography and background
-│   ├── search.md                        # Search page endpoint
-│   ├── blog/                            # Long-form essays and architectural blueprints
-│   ├── notes/                           # Technical cheat sheets and reference notes
+│   ├── about.md                         # Author biography
+│   ├── search.md                        # Client-side search endpoint
+│   ├── blog/                            # Long-form architectural essays
+│   ├── notes/                           # Technical cheat sheets and field notes
 │   └── projects/                        # Engineering projects and open-source tooling
-├── static/                              # Site-level static assets (favicons, manifest)
+├── static/                              # Static root assets (favicons, manifest)
 ├── themes/hearth/                       # The Hearth Theme
-│   ├── layouts/                         # Semantic Hugo templates
-│   │   ├── baseof.html                  # Base HTML shell with skip-links
-│   │   ├── home.html                    # Homepage layout
-│   │   ├── page.html                    # Single post layout
+│   ├── layouts/                         # Semantic Hugo HTML templates
+│   │   ├── baseof.html                  # Semantic base shell with skip-to-content
+│   │   ├── home.html                    # Homepage layout (bio + recent cards)
+│   │   ├── page.html                    # Single essay layout with sticky TOC
 │   │   ├── section.html                 # Chronological list layout
-│   │   ├── home.json                    # Search index builder
+│   │   ├── home.json                    # Search index generator
 │   │   ├── _markup/                     # Markdown render hooks (Mermaid)
-│   │   └── _partials/                   # Modular components (header, footer, TOC, scripts)
-│   ├── assets/                          # Processed through Hugo Pipes
+│   │   └── _partials/                   # Modular components (header, footer, meta, TOC)
+│   ├── assets/                          # Hugo Pipes asset pipeline (concatenated & fingerprinted)
 │   │   ├── css/                         # Design tokens, fonts, base, layout, components
-│   │   └── js/                          # Theme toggling, code copy, search engine
+│   │   └── js/                          # Theme toggling, copy buttons, search engine
 │   └── static/                          # Self-hosted variable WOFF2 fonts and favicons
-└── public/                              # Production build output (generated by Hugo)
+└── public/                              # Production build output
 ```
 
 ---
 
-## Getting Started
+## Local Development & Authoring
 
 ### Prerequisites
-* [Hugo Extended](https://gohugo.io/installation/) version `v0.146.0` or newer (tested with `v0.168.0 extended`).
+* [Hugo Extended](https://gohugo.io/installation/) `v0.146.0` or newer.
 
-### Local Development
-To launch the local development server with live reload and draft previewing:
-
+### Development Server
 ```bash
 hugo server -D
 ```
+Open `http://localhost:1313/` in your browser.
 
-Open your browser to `http://localhost:1313/`.
-
-### Creating Content
-
-Content creation uses predefined archetypes to enforce structured frontmatter:
-
+### Authoring New Content
 ```bash
-# New blog essay
-hugo new content blog/my-new-post.md
+# New long-form architectural essay
+hugo new content blog/my-essay.md
 
-# New technical note
-hugo new content notes/iam-policy-pattern.md
+# New technical note or cheat sheet
+hugo new content notes/aws-iam-federation.md
 
 # New portfolio project
-hugo new content projects/my-tool.md
+hugo new content projects/cloud-sentinel.md
 ```
 
----
-
-## Building & Deployment
-
-### Production Build
-To generate a production-ready static build with minification and cache-busting fingerprinting:
-
+### Production Build & Edge Deployment
 ```bash
 hugo --gc --minify
 ```
-
-Static files are output to `./public/`.
-
-### Edge Deployment (Cloudflare Workers / Pages)
-The site is pre-configured for Cloudflare Static Assets via [`wrangler.jsonc`](wrangler.jsonc):
-
-```jsonc
-{
-  "name": "my-blog",
-  "compatibility_date": "2026-10-18",
-  "build": {
-    "command": "hugo --gc --minify"
-  },
-  "assets": {
-    "directory": "./public",
-    "not_found_handling": "404-page"
-  }
-}
-```
-
-Ensure your Cloudflare environment variable `HUGO_VERSION` matches your local version (e.g., `0.168.0`).
+Deployed on **Cloudflare Workers / Pages** via `wrangler.jsonc` with `"not_found_handling": "404-page"`.
 
 ---
 
@@ -158,4 +147,4 @@ Ensure your Cloudflare environment variable `HUGO_VERSION` matches your local ve
 
 * **Content & Writings**: © 2026 Pranav. All rights reserved.
 * **Theme Code**: Open-source under the MIT License.
-* **Typefaces**: [Fraunces](https://github.com/undercasetype/fraunces), [Literata](https://github.com/googlefonts/literata), and [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) are licensed under the SIL Open Font License (OFL).
+* **Typefaces**: [Fraunces](https://github.com/undercasetype/fraunces), [Literata](https://github.com/googlefonts/literata), and [JetBrains Mono](https://github.com/JetBrains/JetBrainsMono) licensed under the SIL Open Font License.
