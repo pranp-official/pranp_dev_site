@@ -55,30 +55,6 @@ Layout rules follow classical book design principles (drawing from Robert Bringh
 
 ---
 
-## The Identity: Cryptographic Keyhole Monogram
-
-The browser tab icon (favicon) reflects the intersection of **personal identity** and **security engineering**:
-* **The Glyph**: An architectural serif lettermark **"P"** (drawing from Fraunces), with its inner counter carved into a subtle **cryptographic keyhole**.
-* **The Message**: Represents Pranav (`pranp.dev`) while honoring your engineering specialization in **Identity & Access Management (IAM), passkeys, workload federation, and zero-trust credentials**.
-* **Dynamic Theme Awareness**: Delivered as a vector SVG that listens to `@media (prefers-color-scheme: dark)`:
-  * In Light Mode: Terracotta badge with warm parchment letter and keyhole cutout.
-  * In Dark Mode: Soft ember badge with deep ink letter and keyhole cutout.
-
----
-
-## Architectural Underpinnings
-
-While Hearth is designed to look like a classical literary print, its underlying architecture is built on modern, ultra-fast web standards:
-
-* **Zero-Dependency Vanilla Modernism**: Strictly no Tailwind, no npm, and no JavaScript framework runtime. A single `hugo` binary compiles the entire 50+ page site in **~14 milliseconds**.
-* **Native CSS `light-dark()` Engine**: Theming is handled via the native W3C `light-dark()` function directly on `:root`. A manual toggle flips `:root[data-theme]`, triggering a native browser cascade without duplicate CSS selectors.
-* **Anti-FOUC (Flash of Unstyled Content)**: A synchronous inline `<head>` script detects `localStorage` and system preferences before initial paint, preventing any jarring white or black flashes.
-* **Self-Hosted Variable Fonts**: All WOFF2 variable fonts are self-hosted locally and preloaded with `<link rel="preload">`, avoiding external Google Font network latency and privacy leaks.
-* **Selective Runtime Loading**: Heavy client-side runtimes like Mermaid diagrams (~3 MB) are only loaded on pages that explicitly contain diagram code blocks.
-* **Defensive Client-Side Search**: Client-side search queries a lazy-loaded `/index.json` using pure `textContent` DOM nodes, making the search interface completely immune to DOM-based XSS.
-
----
-
 ## Repository Structure
 
 ```text
