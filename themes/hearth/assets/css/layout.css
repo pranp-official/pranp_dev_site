@@ -25,6 +25,11 @@ main,
   padding-inline: var(--space-m);
 }
 
+main {
+  padding-top: var(--space-l);
+  min-height: calc(100vh - 14rem);
+}
+
 .site-header {
   display: flex;
   flex-wrap: wrap;
@@ -91,6 +96,11 @@ main,
 .page-header,
 .post-list {
   max-width: var(--measure);
+}
+
+.intro h1,
+.page-header h1 {
+  margin-top: 0;
 }
 
 .site-footer {
