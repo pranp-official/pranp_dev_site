@@ -66,7 +66,6 @@ This site is my public lab notebook. I write from the perspective of an IAM engi
 * **Georgia Institute of Technology** — *Atlanta, GA*  
   **M.S. in Cybersecurity (Information Security)** *(2026 – Present)*  
   *Focus:* Applied Cryptography, Secure Computer Systems, Software & Binary Security, Critical Infrastructure Resilience, and Information Security Policy.  
-  *Leadership:* Serving as a **Graduate Senator** in the Student Government Association, advocating for campus technology policy and graduate student initiatives.
 
 * **National Institute of Technology Karnataka, Surathkal (NITK)** — *India*  
   **B.Tech in Information Technology** *(2017 – 2021)* — *CGPA: 8.36 / 10.0*  
