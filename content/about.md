@@ -14,7 +14,7 @@ image_style: "avatar"
 
 ## Where I'm Starting From
 
-For nearly five years at OCI, I was part of a team working on the control plane of hyperscale identity. As a developer, and later a senior developer, my contributions included redesigning authorization paths (working with 100+ OCI teams), fixing race conditions across distributed replicas, and a change that cut replication load by 10× for services operating at massive scale.
+For nearly five years at OCI, I was part of a team working on the control plane of hyperscale identity. As a developer, and later a senior developer, my contributions included redesigning authorization paths with many OCI service teams, fixing race conditions across distributed replicas, and a change that cut replication load by an order of magnitude for services operating at scale.
 
 I was lucky to learn alongside architects and engineers with deep experience in OAuth, identity and cloud security, and to be taught just as much by the people on the other side of our APIs. The developers and architects on teams integrating with us were my most honest design reviewers. Their feedback was often one sentence, "great, but how do I roll this out on Monday?", and it opened my eyes to the trade-offs security architects face every day: security versus usability, ease of maintenance and onboarding, simpler customer flows. I'm still learning from both.
 
@@ -62,11 +62,12 @@ This site is my public lab notebook. I'm writing as someone learning in public, 
 **Senior Core Infrastructure Engineer** *(2024 – 2026)* | **Member of Technical Staff** *(2021 – 2024)*  
 *Core developer and mentor on the OCI Identity and Access Management (IAM) & Identity Cloud Services team.*
 
-* **Identity integration for internal teams:** Worked with internal OCI service teams to integrate them with Identity Cloud Services, and was one of the owners of the API suite that made this seamless. That simplified customer onboarding for those teams and made OCI IAM/IDCS their default solution for identity and access management.
-* **Federation and provisioning:** Worked on the application-management team, which holds the central configuration for third-party identity providers (SAML, OAuth, OpenID Connect, federation, provisioning and synchronization) and maintains connectors to external providers. Because this layer touches most others, I gained exposure across much of the identity stack.
-* **Large-scale migration:** Part of the team migrating Oracle's Fusion application fleet onto OCI IAM/IDCS, at a scale of tens of thousands of pods and hundreds of millions of identities. Designed and developed features in the application-management layer and the internal integration API that supported no-downtime upgrades and safe rollback when a new build misbehaved.
-* **Bridging two authorization models (identity domains):** Joined when most of the identity domains work was already built, and contributed at the seam between policy-based authorization with signed requests (OCI IAM) and role-based access control with bearer tokens (IDCS). My focus was making APIs behave safely under both models, since two individually secure systems can combine into subtle gaps. That meant working across two data planes and sources of truth, supporting token-exchange use cases, extending APIs to accept signature-based requests (bearer tokens can be replayed if leaked and tend to encourage insecure practices), and rolling changes out without breaking compatibility, while working with internal teams and external customers who pushed back on losing those habits. I also helped find and close gaps in how the two systems' semantics interact.
-* **Distributed Systems & Scale:** Diagnosed and resolved major control-plane bottlenecks, eliminating redundant event traffic to **reduce load on the replication service by 10×**, and engineered concurrency safeguards that eliminated race conditions in a highly distributed environment.
+* **Identity integration for internal teams:** Worked with internal OCI service teams to integrate them with Identity Cloud Services, and was one of the owners of the integration APIs that made this seamless. That simplified customer onboarding for those teams and made OCI IAM/IDCS their default solution for identity and access management.
+* **Federation and provisioning:** Worked on application management, which covers configuration of third-party identity providers (SAML, OAuth, OpenID Connect, federation, provisioning and synchronization) and connectors to external providers. Because this area touches most others, I gained exposure across much of the identity stack.
+* **Large-scale migration:** Part of the team migrating Oracle's Fusion applications onto OCI IAM/IDCS, a very large-scale effort across a huge application fleet and identity population. Designed and developed features in the integration layer that let application upgrades happen without downtime and roll back safely.
+* **Bridging two authorization models (identity domains):** Joined when most of the identity domains work was already built, and contributed at the seam between policy-based authorization with signed requests (OCI IAM) and role-based access control with bearer tokens (IDCS). My focus was making APIs behave safely under both models, since two individually secure systems can combine into subtle issues. That meant coordinating across both systems, supporting token-exchange use cases, and extending APIs to accept signature-based requests (bearer tokens can be replayed if leaked and encourage insecure practices), then rolling changes out without breaking compatibility, including with internal teams and external customers who pushed back. I also helped identify and resolve inconsistencies in how the two systems' semantics interact.
+* **Terraform tooling for API authorization:** As our APIs moved to signature-based authorization governed by OCI IAM policies, hand-written policies for the APIs called only by internal OCI teams were prone to subtle mistakes, which made them hard to analyze and maintain. As the sole developer, I built a Terraform framework from scratch that made defining that authorization config-driven. I was also one of the developers of an internal Terraform provider, used by many internal OCI service teams, for teams that preferred to call those APIs through Terraform. Evolving the framework as new teams onboarded taught me when abstraction and modularization pay off, and that the cleanest design isn't always right when time is short: much of the skill is choosing the moment to refactor.
+* **Distributed Systems & Scale:** Diagnosed and resolved major control-plane bottlenecks, eliminating redundant event traffic to **cut load on a core replication service by an order of magnitude**, and engineered concurrency safeguards that eliminated race conditions in a highly distributed environment.
 * **Mentorship:** Mentored junior engineers on distributed architecture and debugging.
 * **Recognition:** Awarded **4× OCI Spot Awards (2025)** for technical impact and execution.
 
@@ -89,9 +90,9 @@ This site is my public lab notebook. I'm writing as someone learning in public, 
 
 ---
 
-## Selected Research & Publications
+## Earlier Research & Publications
 
-My earlier research explored machine learning, computer vision, natural language processing and distributed systems, and earned **75+ citations** across peer-reviewed venues. That ML background is part of why AI security interests me now.
+I did this work around my undergraduate years, mostly in machine learning, before I moved into security. It’s where my research experience started, and it’s something I want to build on in a more focused way at Georgia Tech. The papers have earned 75+ citations across peer-reviewed venues.
 
 * **[Sarcasm Detection in Tweets with BERT and GloVe Embeddings](https://aclanthology.org/2020.figlang-1.7/)** *(ACL Workshop on Figurative Language Processing, 2020)* — **[56 Citations]**  
   Built an end-to-end NLP classification pipeline comparing contextual (BERT) and non-contextual (GloVe) embeddings across balanced datasets.
@@ -129,4 +130,3 @@ If your team is building core security or identity infrastructure, and especiall
 
 * **GitHub:** [github.com/pranp-official](#)
 * **LinkedIn:** [linkedin.com/in/pranp](#)
-* **Email:** [pranav.prakash.msc@gmail.com](mailto:pranav.prakash.msc@gmail.com)
