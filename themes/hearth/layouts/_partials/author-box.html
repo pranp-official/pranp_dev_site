@@ -1,0 +1,68 @@
+{{ $author := .Params.author }}
+{{ $siteAuthor := site.Params.author }}
+{{ $name := "" }}
+{{ $title := "" }}
+{{ $bio := "" }}
+{{ $image := "" }}
+{{ $url := "" }}
+{{ $github := "" }}
+{{ $linkedin := "" }}
+
+{{ if reflect.IsMap $author }}
+  {{ $name = $author.name | default $siteAuthor.name | default site.Title }}
+  {{ $title = $author.title | default $siteAuthor.title }}
+  {{ $bio = $author.bio | default $siteAuthor.bio }}
+  {{ $image = $author.image | default $siteAuthor.image }}
+  {{ $url = $author.url | default $siteAuthor.url }}
+  {{ $github = $author.github | default $siteAuthor.github }}
+  {{ $linkedin = $author.linkedin | default $siteAuthor.linkedin }}
+{{ else if $author }}
+  {{ $name = $author }}
+  {{ if reflect.IsMap $siteAuthor }}
+    {{ $title = $siteAuthor.title }}
+    {{ $bio = $siteAuthor.bio }}
+    {{ $image = $siteAuthor.image }}
+    {{ $url = $siteAuthor.url }}
+    {{ $github = $siteAuthor.github }}
+    {{ $linkedin = $siteAuthor.linkedin }}
+  {{ end }}
+{{ else if reflect.IsMap $siteAuthor }}
+  {{ $name = $siteAuthor.name | default site.Title }}
+  {{ $title = $siteAuthor.title }}
+  {{ $bio = $siteAuthor.bio }}
+  {{ $image = $siteAuthor.image }}
+  {{ $url = $siteAuthor.url }}
+  {{ $github = $siteAuthor.github }}
+  {{ $linkedin = $siteAuthor.linkedin }}
+{{ else }}
+  {{ $name = $siteAuthor | default site.Title }}
+{{ end }}
+
+{{ if and (ne .Params.author false) (or $name $bio) }}
+<aside class="author-box" aria-label="Author information">
+  {{ with $image }}
+    <div class="author-avatar">
+      <img src="{{ . | relURL }}" alt="{{ $name }}" class="author-avatar-img" width="72" height="72" loading="lazy">
+    </div>
+  {{ end }}
+  <div class="author-details">
+    <div class="author-heading">
+      <span class="author-label">Written by</span>
+      <h3 class="author-name">
+        {{ if $url }}<a href="{{ $url | relURL }}">{{ $name }}</a>{{ else }}{{ $name }}{{ end }}
+      </h3>
+      {{ with $title }}<span class="author-title">· {{ . }}</span>{{ end }}
+    </div>
+    {{ with $bio }}
+      <p class="author-bio">{{ . }}</p>
+    {{ end }}
+    {{ if or $url $github $linkedin }}
+      <div class="author-links">
+        {{ with $url }}<a href="{{ . | relURL }}">About</a>{{ end }}
+        {{ with $github }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">GitHub</a>{{ end }}
+        {{ with $linkedin }}<a href="{{ . }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>{{ end }}
+      </div>
+    {{ end }}
+  </div>
+</aside>
+{{ end }}

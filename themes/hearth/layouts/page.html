@@ -1,11 +1,24 @@
 {{ define "main" }}
+{{ $featImg := .Params.image }}
+{{ $imgStyle := .Params.image_style | default "" }}
 <article class="post">
-  <header class="post-header">
-    {{ partial "post-meta.html" . }}
+  <header class="post-header {{ with $featImg }}has-image{{ end }} {{ with $imgStyle }}image-style-{{ . }}{{ end }}">
+    {{ partial "post-meta.html" (dict "page" . "showAuthor" true) }}
     <h1>{{ .Title }}</h1>
     {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+    {{ with $featImg }}
+      <figure class="page-feature-media {{ with $imgStyle }}is-{{ . }}{{ end }}">
+        <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" class="page-feature-image" loading="eager">
+        {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+      </figure>
+    {{ end }}
   </header>
   {{ partial "toc.html" . }}
   <div class="prose">{{ .Content }}</div>
+  {{ if and (ne .Section "") (ne .Params.author false) }}
+    {{ partial "author-box.html" . }}
+  {{ else if .Params.author_box }}
+    {{ partial "author-box.html" . }}
+  {{ end }}
 </article>
 {{ end }}

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <style>
+      :root {
+        --bg: #A3472B;
+        --figure: #FAF6EE;
+        --accent: #87361E;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #E0875F;
+          --figure: #1C1815;
+          --accent: #C76F47;
+        }
+      }
+      .bg { fill: var(--bg); }
+      .figure { fill: var(--figure); }
+      .accent { fill: var(--accent); }
+    </style>
+  </defs>
+  <!-- Background Circle with Soft Border -->
+  <circle class="bg" cx="128" cy="128" r="124"/>
+  <circle cx="128" cy="128" r="120" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+  
+  <!-- Stylized Editorial Author Silhouette -->
+  <!-- Head -->
+  <circle class="figure" cx="128" cy="98" r="42"/>
+  
+  <!-- Shoulders & Torso -->
+  <path class="figure" d="
+    M 54 216
+    C 54 168 84 152 128 152
+    C 172 152 202 168 202 216
+    C 182 236 156 248 128 248
+    C 100 248 74 236 54 216
+    Z
+  "/>
+</svg>

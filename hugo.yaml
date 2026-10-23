@@ -18,7 +18,14 @@ outputs:
 params:
   env: production
   description: "Notes on cloud security and identity"
-  author: "Pranav"
+  author:
+    name: "Pranav"
+    title: "Security Engineer"
+    bio: "Security engineer focusing on cloud infrastructure security, identity systems, and zero-trust architectures."
+    image: "/images/author.svg"
+    url: "/about/"
+    github: "https://github.com/pranp-official"
+    linkedin: "https://www.linkedin.com/in/pranp"
 
 menus:
   main:

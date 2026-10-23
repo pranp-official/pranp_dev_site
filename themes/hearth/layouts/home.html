@@ -1,7 +1,16 @@
 {{ define "main" }}
-<section class="intro">
-  <h1>{{ site.Title }}</h1>
-  {{ .Content }}
+{{ $heroImg := .Params.image }}
+<section class="intro {{ with $heroImg }}has-image{{ end }}">
+  <div class="intro-content">
+    <h1>{{ site.Title }}</h1>
+    {{ .Content }}
+  </div>
+  {{ with $heroImg }}
+    <div class="intro-media">
+      <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default site.Title }}" class="intro-image" width="140" height="140" loading="eager">
+      {{ with $.Params.image_caption }}<span class="intro-image-caption">{{ . }}</span>{{ end }}
+    </div>
+  {{ end }}
 </section>
 
 <section class="recent">
