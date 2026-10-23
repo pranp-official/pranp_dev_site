@@ -490,10 +490,30 @@
   border: 1px solid var(--border);
 }
 
-.page-feature-media.is-avatar,
-.post-header.image-style-avatar .page-feature-media {
-  margin-top: var(--space-m);
-  margin-bottom: var(--space-s);
+/* Post Header with Avatar style (e.g. About page) */
+.post-header.image-style-avatar {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: var(--space-m);
+  max-width: var(--measure);
+}
+
+@media (min-width: 44rem) {
+  .post-header.image-style-avatar {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-l);
+  }
+}
+
+.post-header.image-style-avatar .post-header-content {
+  flex: 1;
+}
+
+.post-header.image-style-avatar .post-header-media {
+  flex-shrink: 0;
+  text-align: center;
 }
 
 .page-feature-media.is-avatar .page-feature-image,

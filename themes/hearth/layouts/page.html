@@ -4,26 +4,44 @@
 {{ $hasShare := and (ne .Section "") (ne .Params.share false) }}
 <article class="post {{ if $hasShare }}has-share-rail{{ end }}">
   <header class="post-header {{ with $featImg }}has-image{{ end }} {{ with $imgStyle }}image-style-{{ . }}{{ end }}">
-    {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
-      <p class="post-eyebrow">
-        <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
-        {{ if gt .ReadingTime 0 }}
-          <span class="eyebrow-sep" aria-hidden="true">•</span>
-          <span>{{ .ReadingTime }} MIN READ</span>
+    {{ if eq $imgStyle "avatar" }}
+      <div class="post-header-content">
+        {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
+          <p class="post-eyebrow">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
+            {{ if gt .ReadingTime 0 }}
+              <span class="eyebrow-sep" aria-hidden="true">•</span>
+              <span>{{ .ReadingTime }} MIN READ</span>
+            {{ end }}
+          </p>
         {{ end }}
-      </p>
-    {{ end }}
-    <h1>{{ .Title }}</h1>
-    {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
-    {{ with $featImg }}
-      <figure class="page-feature-media {{ with $imgStyle }}is-{{ . }}{{ end }}">
-        {{ if eq $imgStyle "avatar" }}
+        <h1>{{ .Title }}</h1>
+        {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+      </div>
+      {{ with $featImg }}
+        <div class="post-header-media">
           {{ partial "avatar.html" (dict "src" . "alt" ($.Params.image_alt | default $.Title) "size" 120 "class" "page-feature-image" "loading" "eager") }}
-        {{ else }}
+          {{ with $.Params.image_caption }}<span class="intro-image-caption">{{ . }}</span>{{ end }}
+        </div>
+      {{ end }}
+    {{ else }}
+      {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
+        <p class="post-eyebrow">
+          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
+          {{ if gt .ReadingTime 0 }}
+            <span class="eyebrow-sep" aria-hidden="true">•</span>
+            <span>{{ .ReadingTime }} MIN READ</span>
+          {{ end }}
+        </p>
+      {{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
+      {{ with $featImg }}
+        <figure class="page-feature-media {{ with $imgStyle }}is-{{ . }}{{ end }}">
           <img src="{{ . | relURL }}" alt="{{ $.Params.image_alt | default $.Title }}" class="page-feature-image" loading="eager">
-        {{ end }}
-        {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
-      </figure>
+          {{ with $.Params.image_caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+        </figure>
+      {{ end }}
     {{ end }}
     {{ partial "post-meta.html" (dict "page" . "showAuthor" true) }}
   </header>
