@@ -1,7 +1,8 @@
 {{ define "main" }}
 {{ $featImg := .Params.image }}
 {{ $imgStyle := .Params.image_style | default "" }}
-<article class="post">
+{{ $hasShare := and (ne .Section "") (ne .Params.share false) }}
+<article class="post {{ if $hasShare }}has-share-rail{{ end }}">
   <header class="post-header {{ with $featImg }}has-image{{ end }} {{ with $imgStyle }}image-style-{{ . }}{{ end }}">
     {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
       <p class="post-eyebrow">
@@ -22,6 +23,9 @@
     {{ end }}
     {{ partial "post-meta.html" (dict "page" . "showAuthor" true) }}
   </header>
+  {{ if $hasShare }}
+    {{ partial "share-rail.html" . }}
+  {{ end }}
   {{ partial "toc.html" . }}
   <div class="prose">{{ .Content }}</div>
   {{ if .Params.author_box }}
