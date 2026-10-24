@@ -1,6 +1,23 @@
 {{ define "main" }}
 <header class="page-header">
   <h1>{{ .Title }}</h1>
+  
+  <aside class="enterprise-callout" aria-label="Enterprise Experience">
+    <div class="enterprise-callout-badge">
+      <span class="badge-dot" aria-hidden="true"></span>
+      <span class="badge-label">ENTERPRISE SYSTEMS · ORACLE CLOUD</span>
+    </div>
+    <div class="enterprise-callout-body">
+      <p class="enterprise-callout-text">
+        Most of my code from the last five years was built for internal enterprise systems at <strong>Oracle Cloud Infrastructure (OCI)</strong> and is proprietary. For architecture highlights—federation, authorization, and replication scaling—see my industry summary.
+      </p>
+      <a href="{{ "/about/#what-i-bring-industry-experience" | relURL }}" class="enterprise-callout-btn">
+        <span>Read OCI Experience</span>
+        <span class="btn-arrow" aria-hidden="true">→</span>
+      </a>
+    </div>
+  </aside>
+
   {{ with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
 </header>
 
