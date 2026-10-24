@@ -3,6 +3,9 @@ locale: en-us
 title: "Pranav"
 theme: hearth
 
+taxonomies:
+  category: categories
+  tag: tags
 
 pagination:
   pagerSize: 10

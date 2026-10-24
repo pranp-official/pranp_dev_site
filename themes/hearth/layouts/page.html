@@ -8,6 +8,11 @@
       <div class="post-header-content">
         {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
           <p class="post-eyebrow">
+            {{ $cat := or .Params.category (and .Params.categories (index .Params.categories 0)) }}
+            {{ with $cat }}
+              <a href="{{ (printf "categories/%s" (. | urlize)) | relLangURL }}" class="eyebrow-category">{{ . | humanize | upper }}</a>
+              <span class="eyebrow-sep" aria-hidden="true">•</span>
+            {{ end }}
             <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
             {{ if gt .ReadingTime 0 }}
               <span class="eyebrow-sep" aria-hidden="true">•</span>
@@ -27,6 +32,11 @@
     {{ else }}
       {{ if and (not .Date.IsZero) (ne .Params.eyebrow false) }}
         <p class="post-eyebrow">
+          {{ $cat := or .Params.category (and .Params.categories (index .Params.categories 0)) }}
+          {{ with $cat }}
+            <a href="{{ (printf "categories/%s" (. | urlize)) | relLangURL }}" class="eyebrow-category">{{ . | humanize | upper }}</a>
+            <span class="eyebrow-sep" aria-hidden="true">•</span>
+          {{ end }}
           <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" | upper }}</time>
           {{ if gt .ReadingTime 0 }}
             <span class="eyebrow-sep" aria-hidden="true">•</span>

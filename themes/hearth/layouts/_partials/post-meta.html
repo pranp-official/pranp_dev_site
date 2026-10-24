@@ -85,6 +85,11 @@
   {{ else }}
     <p class="meta">
       {{ if not $showAuthor }}
+        {{ $cat := or $p.Params.category (and $p.Params.categories (index $p.Params.categories 0)) }}
+        {{ with $cat }}
+          <span class="meta-category">{{ . | humanize | upper }}</span>
+          <span class="meta-sep">·</span>
+        {{ end }}
         {{ if $hasDate }}
           <time datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date.Format "Jan 2, 2006" }}</time>
         {{ end }}
