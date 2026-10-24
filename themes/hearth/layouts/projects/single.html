@@ -25,28 +25,26 @@
     <h1>{{ .Title }}</h1>
     {{ with .Description }}<p class="lede">{{ . }}</p>{{ end }}
 
-    {{ if or .Params.authors .Params.doi .Params.links }}
-      <div class="project-header-meta">
-        {{ with .Params.authors }}
-          <p class="project-authors"><strong>Authors:</strong> {{ delimit . ", " }}</p>
+    {{ with .Params.authors }}
+      <p class="project-authors-line">By {{ delimit . ", " }}</p>
+    {{ end }}
+
+    {{ if or .Params.links .Params.doi }}
+      <div class="project-actions">
+        {{ range .Params.links }}
+          <a href="{{ .url }}" class="project-action-link" target="_blank" rel="noopener noreferrer">
+            {{ .label }}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         {{ end }}
         {{ with .Params.doi }}
-          <p class="project-doi"><strong>DOI:</strong> <a href="https://doi.org/{{ . }}" target="_blank" rel="noopener noreferrer">{{ . }}</a></p>
-        {{ end }}
-        {{ with .Params.links }}
-          <div class="project-links-bar">
-            {{ range . }}
-              <a href="{{ .url }}" class="project-btn" target="_blank" rel="noopener noreferrer">
-                {{ .label }}
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-              </a>
-            {{ end }}
-          </div>
+          <a href="https://doi.org/{{ . }}" class="project-action-link" target="_blank" rel="noopener noreferrer">
+            DOI: {{ . }}
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </a>
         {{ end }}
       </div>
     {{ end }}
-
-    {{ partial "post-meta.html" (dict "page" . "showAuthor" false "hideTags" false) }}
   </header>
 
   {{ if $hasShare }}
