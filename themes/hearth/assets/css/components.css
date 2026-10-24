@@ -80,6 +80,69 @@
   margin-right: var(--space-s);
 }
 
+.card-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-xs);
+}
+
+.card-detail-link {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.project-authors-line {
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin: calc(var(--space-xs) * -1) 0 var(--space-s);
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: var(--space-s) 0 0;
+  padding-bottom: var(--space-s);
+  border-bottom: 1px solid var(--border);
+}
+
+.project-action-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: var(--font-ui);
+  font-size: var(--step--1);
+  font-weight: 500;
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+}
+
+.project-action-link:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.project-action-link svg {
+  color: var(--muted);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.project-action-link:hover svg {
+  color: var(--accent);
+  transform: translate(1px, -1px);
+}
+
 .meta {
   font-family: var(--font-ui);
   font-size: var(--step--1);
@@ -170,11 +233,22 @@
 
 /* Mermaid diagrams */
 .mermaid {
-  background: transparent;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-m);
+  margin: var(--space-m) 0 var(--space-l);
   display: flex;
   justify-content: center;
+  align-items: center;
   overflow-x: auto;
-  padding: var(--space-m) 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+.mermaid svg {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
 }
 
 /* Post eyebrow kicker (Slack Engineering style: date and reading time placed above title) */

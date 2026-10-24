@@ -1,21 +1,73 @@
 {{ define "main" }}
 <header class="page-header">
   <h1>{{ .Title }}</h1>
-  {{ with .Content }}<div class="lede">{{ . }}</div>{{ end }}
+  {{ with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
 </header>
-<div class="card-grid">
-  {{ range .Pages }}
-    <article class="card">
-      <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
-      <p>{{ .Description }}</p>
-      {{ with .Params.links }}
-        <p class="links">
-          {{ range . }}
-            <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }}</a>{{ " " }}
+
+{{ $research := where .Pages.ByWeight "Params.category" "research" }}
+{{ with $research }}
+<section class="projects-section">
+  <div class="section-header">
+    <p class="section-kicker">01 / ACADEMIC LITERATURE</p>
+    <h2>Research &amp; Publications</h2>
+  </div>
+  <div class="card-grid card-grid-prominent">
+    {{ range . }}
+      <article class="card">
+        {{ if .Params.venue }}
+          <p class="card-eyebrow">{{ .Params.venue }}{{ with .Params.citations }} · <strong>{{ . }} Citations</strong>{{ end }}</p>
+        {{ else }}
+          {{ with .Params.tags }}
+            <p class="card-eyebrow">{{ delimit (first 2 .) " · " | upper }}</p>
           {{ end }}
-        </p>
-      {{ end }}
-    </article>
-  {{ end }}
-</div>
+        {{ end }}
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="card-desc">{{ .Description }}</p>
+        <div class="links">
+          {{ with .Params.links }}
+            {{ range . }}
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }} ↗</a>{{ " " }}
+            {{ end }}
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="card-detail-link">Overview →</a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
+{{ $engineering := where .Pages.ByWeight "Params.category" "engineering" }}
+{{ with $engineering }}
+<section class="projects-section">
+  <div class="section-header">
+    <p class="section-kicker">02 / SOFTWARE &amp; TOOLS</p>
+    <h2>Systems &amp; Security Engineering</h2>
+  </div>
+  <div class="card-grid">
+    {{ range . }}
+      <article class="card">
+        {{ if .Params.venue }}
+          <p class="card-eyebrow">{{ .Params.venue }}{{ with .Params.citations }} · <strong>{{ . }} Citations</strong>{{ end }}</p>
+        {{ else }}
+          {{ with .Params.tags }}
+            <p class="card-eyebrow">{{ delimit (first 2 .) " · " | upper }}</p>
+          {{ end }}
+        {{ end }}
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="card-desc">{{ .Description }}</p>
+        <div class="links">
+          {{ with .Params.links }}
+            {{ range . }}
+              <a href="{{ .url }}" target="_blank" rel="noopener noreferrer">{{ .label }} ↗</a>{{ " " }}
+            {{ end }}
+          {{ end }}
+          <a href="{{ .RelPermalink }}" class="card-detail-link">Overview →</a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
 {{ end }}
