@@ -111,9 +111,6 @@ I did this work around my undergraduate years, mostly in machine learning, befor
 
 * **[Low-Latency Vision Pipeline for Sports Analytics](/projects/sports-vision-analytics/):** Engineered an automated badminton shot-detection and player-profiling system using OpenPose skeleton extraction and real-time ML classification pipelines.
 * **[Remote Sensing Change Detection via Merkle & Quadtrees](/projects/remote-sensing-merkle-quadtree/):** Designed a high-efficiency spatial change-detection algorithm combining Quadtrees with cryptographic Merkle Trees for fast verification of satellite imagery diffs.
-* **[Mail Recon: OSINT Email Harvesting & Breach Auditing](/projects/mail-recon/):** Open-source threat-surface discovery tool automating domain email harvesting via randomized Google search dork rotation and HaveIBeenPwned API breach correlation.
-* **[Interactive Reverse Shell C2 & Terminal Payload](/projects/reverse-shell/):** Two-stage Python C2 framework featuring persistent directory state tracking and interactive pseudo-terminal emulation for penetration testing.
-* **[Touchless HCI: Kinect Gesture Interface for Media Players](/projects/kinect-media-controller/):** Contactless human-computer interaction system translating Xbox One Kinect skeletal kinematics into VLC HTTP API playback commands.
 * **Zero-Touch University Result ETL & Analytics:** Built a one-click ETL pipeline that automated exam data ingestion and spun up customized ELK dashboards for instant academic performance analytics.
 
 ---
