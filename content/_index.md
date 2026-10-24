@@ -1,5 +1,6 @@
 ---
 title: "Pranav"
+description: "Cybersecurity Master's student at Georgia Tech and former OCI IAM developer. Notes on identity, authorization and AI agent security."
 image: "/images/pranav-author.png"
 image_alt: "Pranav"
 ---

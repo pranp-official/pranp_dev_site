@@ -20,8 +20,10 @@ outputs:
 
 params:
   env: production
-  description: "Notes on cloud security and identity"
-  og_image: "/images/og-default.png"
+  description: "Cybersecurity Master's student at Georgia Tech and former OCI IAM developer. Notes on identity, authorization and AI agent security."
+  og_title: "Pranav · Cloud identity, security and AI agents"
+  og_image: "images/og-default.png"
+  og_image_alt: "Pranav, Master's student in Cybersecurity at Georgia Tech"
   author:
     name: "Pranav"
     title: "MS Cybersecurity, Georgia Tech"
