@@ -4,7 +4,7 @@
   {{ with .Content }}<div class="page-intro">{{ . }}</div>{{ end }}
 </header>
 <div class="card-grid">
-  {{ range .Pages.ByDate.Reverse }}
+  {{ range .Pages.ByWeight }}
     <article class="card">
       {{ if .Params.venue }}
         <p class="card-eyebrow">{{ .Params.venue }}{{ with .Params.citations }} · <strong>{{ . }} Citations</strong>{{ end }}</p>

@@ -1,5 +1,6 @@
 ---
 title: "Touchless HCI: Kinect Gesture Interface for Media Players"
+weight: 7
 date: 2019-11-10T09:00:00-04:00
 draft: false
 description: "Contactless human-computer interaction system translating Xbox One Kinect skeletal gestures into real-time VLC media player commands."
