@@ -1,22 +1,22 @@
 :root {
   color-scheme: light dark;
 
-  /* Colour: light-dark(light value, dark value) - Rustic European Town */
-  --bg:          light-dark(#F5EFE3, #13110F);
-  --surface:     light-dark(#EDE4D4, #1D1A17);
-  --text:        light-dark(#221810, #F0E7D8);
-  --muted:       light-dark(#665546, #AD9E8C);
-  --border:      light-dark(#DCD0BA, #322A23);
-  --accent:      light-dark(#98341A, #E27344);
+  /* Colour: light-dark(light value, dark value) - Bold Rustic European Town */
+  --bg:          light-dark(#EEE6D6, #0E0C0A);
+  --surface:     light-dark(#FAF5EB, #1A1613);
+  --text:        light-dark(#1C140E, #F2EAE0);
+  --muted:       light-dark(#5C4D3F, #AD9C88);
+  --border:      light-dark(#D5C4AA, #342A21);
+  --accent:      light-dark(#BA3D1D, #EE6F3B);
   --avatar-border: light-dark(
-    color-mix(in srgb, var(--accent) 60%, var(--border)),
-    color-mix(in srgb, var(--accent) 35%, var(--border))
+    color-mix(in srgb, var(--accent) 70%, var(--border)),
+    color-mix(in srgb, var(--accent) 45%, var(--border))
   );
 
   /* Code syntax tokens - Antiqued rustic palette */
-  --code-string: light-dark(#456632, #A8C678);  /* patinated copper / aged sage */
-  --code-func:   light-dark(#883617, #E89E78);  /* burnt sienna / postbox rust */
-  --code-number: light-dark(#825906, #E5BC58);  /* antique brass / warm ochre */
+  --code-string: light-dark(#3A6328, #A4C674);  /* aged verdigris / moss */
+  --code-func:   light-dark(#A43715, #F09872);  /* bold postbox rust */
+  --code-number: light-dark(#8C5C05, #EABF56);  /* antique brass */
 
   /* Type families */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
