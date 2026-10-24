@@ -4,7 +4,7 @@ weight: 2
 category: "research"
 date: 2021-09-23T09:00:00-04:00
 draft: false
-description: "Benchmarking custom CNN architectures against transfer-learning backbones for detecting generative facial manipulations and digital forensics."
+description: "Dual-track digital forensics framework benchmarking a custom 9-layer CNN with Error-Level Analysis (ELA) against transfer-learning backbones on StyleGAN faces."
 tags: ["computer-vision", "deep-learning", "deepfake-detection", "cnn", "forensics", "research"]
 venue: "IEEE CCGE 2021"
 citations: 17
@@ -17,64 +17,123 @@ links:
 
 ## Overview
 
-The rapid proliferation of deep generative models (GANs, autoencoders) has made realistic facial manipulation—commonly known as *deepfakes*—accessible and convincing. These synthetic media pose significant risks to identity authentication, biometrics, and public trust.
+Advances in deep generative modeling (such as Generative Adversarial Networks and StyleGAN) have enabled the synthesis of photorealistic counterfeit human faces that are virtually indistinguishable from authentic photographs to the naked human eye. These synthetic media pose significant risks to identity verification systems, public discourse, and social trust.
 
-Presented at the **2021 International Conference on Computing, Communication and Green Engineering (CCGE)**, this research explores digital forensic techniques for detecting synthetic face modifications. We conducted a systematic empirical study benchmarking custom-designed Convolutional Neural Network (CNN) architectures against fine-tuned deep transfer-learning backbones.
+Presented at the **2021 International Conference on Computing, Communication and Green Engineering (IEEE CCGE)**, this research investigates automated digital forensic methods to detect GAN-generated counterfeit faces. We designed and benchmarked two distinct technical approaches:
+1. **Deep Learning with Error-Level Analysis (ELA)**: A custom 9-layer Convolutional Neural Network trained directly on compression-artifact maps.
+2. **Transfer Learning Feature Extraction**: Extracting deep spatial representations from pre-trained ImageNet architectures (ResNet-50, VGG-16, Inception V3) and classifying them with classical machine learning models.
 
-The paper has received **17 citations** in multimedia forensics research.
+The paper has earned **17+ citations** in multimedia forensics and computer vision literature.
 
 ---
 
-## Detection Pipeline
+## Detection Architecture
+
+The complete system pipeline mirrors the two-track methodology evaluated in the paper:
 
 ```mermaid
 flowchart TD
-  subgraph Stage1["1. Face Detection & ROI Extraction"]
-    direction LR
-    Img["<b>Input Image / Video Frame</b><br/>Suspect visual media"] --> Face["<b>Facial Region Alignment</b><br/>Bounding box localization"]
-  end
+  Input["<b>Input Face Image</b><br/>256×256 pixels (Kaggle 140k Real/Fake Faces)"]
 
-  subgraph Stage2["2. Generative Artifact Isolation"]
-    direction LR
-    Face --> Seam["<b>Spatial Domain</b><br/>Boundary blending seams"]
-    Face --> Freq["<b>Frequency Domain</b><br/>GAN upsampling checkerboards"]
-  end
+  Input --> Path1
+  Input --> Path2
 
-  subgraph Stage3["3. Deep Architecture Benchmarking"]
-    direction LR
-    subgraph BranchCustom["Custom CNN Engine"]
-      CNN["<b>Custom Lightweight CNN</b><br/>Low parameter footprint"]
+  subgraph Path1["Path A: Transfer Learning (Feature Extraction + ML)"]
+    direction TB
+    subgraph Extractors["Pre-Trained ImageNet Backbones"]
+      direction LR
+      VGG_FE["<b>VGG-16</b><br/>fc2 layer (4096-D)"]
+      Res_FE["<b>ResNet-50</b><br/>avg pool (2048-D)"]
+      Inc_FE["<b>Inception V3</b><br/>avg pool (2048-D)"]
     end
-    subgraph BranchTransfer["Transfer Learning Engine"]
-      Transfer["<b>Pretrained Deep Backbones</b><br/>ResNet-50 · VGG-16 · InceptionV3"]
+
+    subgraph Classifiers["Downstream Classifiers"]
+      direction LR
+      SVM["<b>SVM</b>"]
+      LR["<b>Logistic Regression</b><br/><b>88.47% Accuracy</b> (Best Overall)"]
+      RF["<b>Random Forest</b>"]
     end
+
+    Extractors --> Classifiers
   end
 
-  subgraph Stage4["4. Forensic Classification"]
-    Classifier{"<b>Detection Head</b><br/>Authenticity probability"}
-    Classifier --> Real["<b>Pristine / Real</b><br/>Natural gradient continuity"]
-    Classifier --> Fake["<b>Manipulated Deepfake</b><br/>Synthetic artifact detected"]
+  subgraph Path2["Path B: Deep Learning with Error-Level Analysis (ELA)"]
+    direction TB
+    ELA["<b>Error-Level Analysis (ELA)</b><br/>Identifies JPEG compression non-uniformity"]
+    
+    subgraph DLSuite["Evaluated CNN Architectures"]
+      direction LR
+      PropCNN["<b>Proposed Custom CNN</b><br/>9 layers · 3.3M params · <b>87.46% Acc</b>"]
+      VGG_DL["<b>VGG-16</b><br/>84.13% Acc"]
+      GoogLeNet["<b>GoogLeNet</b><br/>86.24% Acc (100 epochs)"]
+      Res_DL["<b>ResNet-50</b><br/>53.94% Acc"]
+    end
+
+    ELA --> DLSuite
   end
 
-  Seam & Freq --> BranchCustom & BranchTransfer
-  BranchCustom & BranchTransfer --> Classifier
+  Path1 --> Decision{"<b>Deepfake Classification</b><br/>Authentic (Real) vs. Counterfeit (StyleGAN)"}
+  Path2 --> Decision
 ```
+
+---
 
 ## Technical Highlights
 
-### 1. Forensics of Generative Artifacts
-Deepfake synthesis pipelines frequently introduce subtle spatial and frequency-domain inconsistencies that human observers miss but neural feature extractors can isolate:
-- Boundary blending seams around facial perimeters and jawlines.
-- Checkerboard artifacting caused by transposed convolution and upsampling layers in GAN generators.
-- Texture discrepancies across skin tone gradients, eye reflections, and teeth boundaries.
+### 1. Error-Level Analysis (ELA) Preprocessing
+JPEG compression operates across $8 \times 8$ pixel frequency blocks at approximately uniform compression levels across an authentic, unedited photograph (e.g. consistent background and hair compression). Generative networks like StyleGAN generate faces pixel-by-pixel, introducing distinct, high-frequency compression discrepancies:
+- **Real Images**: Exhibit high uniformity across the background and hair regions in their ELA difference map.
+- **Counterfeit Images**: Display pronounced, non-uniform error levels across facial features (eyes, nose, mouth boundaries).
+- The resulting ELA residual map is rescaled to $128 \times 128 \times 3$ and fed into the deep learning models.
 
-### 2. Architecture Benchmarking
-We evaluated multiple detection topologies:
-- **Custom Shallow/Medium CNNs**: Designed for lightweight inference and low parameter footprints, testing how effectively minimal receptive fields capture high-frequency facial noise.
-- **Transfer Learning Backbones**: Pre-trained convolutional networks (ResNet, VGG, Inception) fine-tuned on benchmark manipulation datasets (such as FaceForensics++ and Celeb-DF), evaluating feature reuse and representation generalization.
+### 2. Proposed Custom 9-Layer CNN Architecture
+We designed a lightweight CNN tailored specifically for ELA residual maps, containing **3,306,434 trainable parameters**:
+- **Input Layer**: $128 \times 128 \times 3$ ELA image tensor.
+- **Convolutional Stages**:
+  - Conv Layer 1: 32 filters ($5 \times 5$ kernel), followed by $2 \times 2$ Max-Pooling.
+  - Conv Layer 2: 64 filters ($3 \times 3$ kernel), followed by $2 \times 2$ Max-Pooling.
+  - Conv Layer 3: 128 filters ($3 \times 3$ kernel), followed by $2 \times 2$ Max-Pooling.
+- **Dense Head**: Flattened 1D feature array $\to$ Dense layer with 128 units (ReLU activation) $\to$ Output layer with Softmax activation.
+- **Performance**: Achieved **87.46% accuracy** and **87.57% F1-score** in just **20 epochs**, outperforming GoogLeNet (which required 100 epochs to reach 86.24%) and VGG-16 (84.13%).
 
-### 3. Latency vs. Accuracy Trade-Offs
-In high-throughput screening environments (e.g., identity verification or platform upload filters), deep ensembles are computationally prohibitive. We analyzed precision-recall curves alongside wall-clock inference latency per frame to identify architectures that maintain high true-positive detection rates while remaining computationally viable.
+### 3. Transfer Learning & Classifier Benchmarking
+In the transfer learning path, we decoupled feature representation from classification:
+- **Feature Extraction**: Extracted high-dimensional feature representations from models pre-trained on ImageNet:
+  - **VGG-16**: 4,096-dimensional vectors extracted from the `fc2` fully connected layer.
+  - **ResNet-50**: 2,048-dimensional vectors extracted from the global `avg pool` layer.
+  - **Inception V3**: 2,048-dimensional vectors extracted from the global `avg pool` layer.
+- **Downstream Classifiers**: Evaluated Support Vector Machines (SVM), Logistic Regression, and Random Forest.
+- **Top Overall Result**: **ResNet-50 + Logistic Regression** yielded the highest performance across the entire study:
+  - **Accuracy**: 88.47%
+  - **F1-Score**: 88.40%
+  - **Precision**: 88.95%
+  - **Specificity**: 89.08%
+- **Key Insight**: While end-to-end ResNet-50 achieved only 53.94% accuracy when trained directly on ELA images, freezing its convolutional backbone and training a Logistic Regression classifier on its latent features boosted detection accuracy to **88.47%** (+34.5% improvement).
+
+---
+
+## Dataset & Experimental Evaluation
+
+- **Dataset**: Kaggle *"140k Real and Fake Faces"*:
+  - **Real Faces**: 70,000 real images from the Flickr-Faces-HQ (FFHQ) dataset collected by Nvidia.
+  - **Counterfeit Faces**: 70,000 fake faces generated using StyleGAN (*"1 Million Fake Faces"*).
+  - **Resolution**: $256 \times 256$ pixels.
+- **Data Splits**:
+  - **Training & Validation**: 25,000 images (12,500 real, 12,500 fake, with 5,000 reserved for validation).
+  - **Test Set**: 20,000 unseen images (10,000 authentic, 10,000 counterfeit).
+
+### Comparative Results Summary
+
+| Approach | Model / Classifier | Accuracy | F1-Score | Precision | Recall |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| **Deep Learning (ELA)** | **Proposed Custom CNN (20 epochs)** | **87.46%** | **87.57%** | **86.76%** | **88.40%** |
+| Deep Learning (ELA) | GoogLeNet (100 epochs) | 86.24% | 86.26% | 86.17% | 86.35% |
+| Deep Learning (ELA) | VGG-16 (20 epochs) | 84.13% | 85.41% | 79.01% | 92.95% |
+| Deep Learning (ELA) | ResNet-50 (20 epochs) | 53.94% | 27.88% | 64.20% | 17.81% |
+| **Transfer Learning** | **ResNet-50 + Logistic Regression** | **88.47%** | **88.40%** | **88.95%** | **87.87%** |
+| Transfer Learning | ResNet-50 + SVM | 88.41% | 88.34% | 88.90% | 87.79% |
+| Transfer Learning | Inception V3 + Logistic Regression | 84.27% | 84.25% | 84.35% | 84.16% |
+| Transfer Learning | VGG-16 + Logistic Regression | 79.68% | 79.42% | 80.46% | 78.42% |
 
 ---
 
