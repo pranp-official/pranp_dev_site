@@ -1,12 +1,22 @@
 {{- $title := .Params.og_title | default (cond .IsHome site.Params.og_title (printf "%s · %s" .Title site.Title)) -}}
 {{- $desc := .Description | default site.Params.description -}}
 {{- $img := .Params.og_image | default site.Params.og_image | default "images/og-default.png" -}}
+{{- $imgURL := $img | absURL -}}
+{{- $imgType := "image/png" -}}
+{{- if or (strings.HasSuffix $img ".jpg") (strings.HasSuffix $img ".jpeg") -}}
+  {{- $imgType = "image/jpeg" -}}
+{{- else if strings.HasSuffix $img ".webp" -}}
+  {{- $imgType = "image/webp" -}}
+{{- end -}}
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
 <meta property="og:site_name" content="{{ site.Title }}">
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $desc }}">
 <meta property="og:url" content="{{ .Permalink }}">
-<meta property="og:image" content="{{ $img | absURL }}">
+<meta property="og:locale" content="{{ site.Language.Locale | default "en_US" }}">
+<meta property="og:image" content="{{ $imgURL }}">
+<meta property="og:image:secure_url" content="{{ $imgURL }}">
+<meta property="og:image:type" content="{{ $imgType }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="{{ site.Params.og_image_alt }}">
@@ -16,4 +26,4 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $desc }}">
-<meta name="twitter:image" content="{{ $img | absURL }}">
+<meta name="twitter:image" content="{{ $imgURL }}">
