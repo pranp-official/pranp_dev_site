@@ -1,6 +1,7 @@
 ---
 title: "Deepfake Image Detection using CNNs and Transfer Learning"
 weight: 2
+category: "research"
 date: 2021-09-23T09:00:00-04:00
 draft: false
 description: "Benchmarking custom CNN architectures against transfer-learning backbones for detecting generative facial manipulations and digital forensics."

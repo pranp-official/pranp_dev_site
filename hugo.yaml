@@ -20,7 +20,7 @@ params:
   description: "Notes on cloud security and identity"
   author:
     name: "Pranav"
-    title: "M.S. in Cybersecurity | Georgia Tech"
+    title: "MS Cybersecurity, Georgia Tech"
     bio: "Student focusing on cloud infrastructure security, identity systems, and zero-trust architectures."
     image: "/images/pranav-author.png"
     url: "/"

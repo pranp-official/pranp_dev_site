@@ -1,6 +1,7 @@
 ---
 title: "Remote Sensing Change Detection via Merkle & Quadtrees"
 weight: 4
+category: "engineering"
 date: 2020-11-20T09:00:00-04:00
 draft: false
 description: "Spatial change-detection algorithm combining Quadtree geometric decomposition with cryptographic Merkle Trees for rapid verification of satellite imagery diffs."

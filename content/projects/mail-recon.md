@@ -1,6 +1,7 @@
 ---
 title: "Mail Recon: OSINT Email Harvesting & Breach Auditing"
 weight: 5
+category: "engineering"
 date: 2020-05-15T09:00:00-04:00
 draft: false
 description: "Open-source intelligence tool that harvests an organization's public email footprint via randomized search dorks and correlates addresses with breach databases."

@@ -1,12 +1,13 @@
 ---
 title: "Low-Latency Vision Pipeline for Sports Analytics"
 weight: 3
+category: "engineering"
 date: 2021-04-10T09:00:00-04:00
 draft: false
 description: "End-to-end computer vision and machine learning pipeline for automated badminton shot classification using OpenPose skeletal tracking and ML models."
 tags: ["computer-vision", "openpose", "sports-analytics", "machine-learning", "video-processing"]
 links:
-  - label: "GitHub (Private Repo)"
+  - label: "GitHub"
     url: "https://github.com/pranp-official/badminton-shot-detection"
 ---
 

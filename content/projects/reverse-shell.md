@@ -1,6 +1,7 @@
 ---
 title: "Interactive Reverse Shell C2 & Terminal Payload"
 weight: 6
+category: "engineering"
 date: 2020-08-18T09:00:00-04:00
 draft: false
 description: "Two-stage Python command-and-control listener and target payload engineered for persistent directory state and interactive terminal emulation."

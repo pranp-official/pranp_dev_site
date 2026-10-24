@@ -96,6 +96,40 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
 }
 
+.card-grid-prominent {
+  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+}
+
+.projects-section {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-l);
+  border-top: 1px solid var(--border);
+}
+
+.projects-section:first-of-type {
+  margin-top: var(--space-l);
+}
+
+.projects-section .section-header {
+  margin-bottom: var(--space-m);
+}
+
+.projects-section .section-kicker {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 var(--space-xs);
+}
+
+.projects-section .section-header h2 {
+  margin: 0;
+  font-size: var(--step-2);
+  line-height: 1.25;
+}
+
 .post-list {
   list-style: none;
   padding: 0;

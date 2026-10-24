@@ -1,6 +1,7 @@
 ---
 title: "Sarcasm Detection in Tweets with BERT and GloVe Embeddings"
 weight: 1
+category: "research"
 date: 2020-07-09T09:00:00-04:00
 draft: false
 description: "End-to-end NLP classification pipeline comparing contextual (BERT) and static (GloVe) representations, incorporating full conversational context."
