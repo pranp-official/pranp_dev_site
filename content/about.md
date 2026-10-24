@@ -128,5 +128,5 @@ I'd like to hear from engineers, researchers and architects working on **cloud i
 
 If your team is building core security or identity infrastructure, and especially if you're hiring **Summer 2027 interns** who bring production experience and are eager to learn the research side, I'd love to chat.
 
-* **GitHub:** [github.com/pranp-official](https://www.linkedin.com/in/pranp/)
-* **LinkedIn:** [linkedin.com/in/pranp](https://github.com/pranp-official)
+* **GitHub:** [github.com/pranp-official](https://github.com/pranp-official)
+* **LinkedIn:** [linkedin.com/in/pranp](https://www.linkedin.com/in/pranp/)

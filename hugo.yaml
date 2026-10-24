@@ -21,6 +21,7 @@ outputs:
 params:
   env: production
   description: "Notes on cloud security and identity"
+  og_image: "/images/og-default.png"
   author:
     name: "Pranav"
     title: "MS Cybersecurity, Georgia Tech"
