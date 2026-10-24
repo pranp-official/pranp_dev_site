@@ -1,6 +1,7 @@
 {{ define "main" }}
 <header class="page-header">
-  <h1>Tag: {{ .Title }}</h1>
+  <p class="section-kicker">{{ if eq .Data.Singular "category" }}CATEGORY{{ else }}TAG{{ end }}</p>
+  <h1>{{ .Title }}</h1>
   {{ with .Content }}<div class="lede">{{ . }}</div>{{ end }}
 </header>
 <ul class="post-list">

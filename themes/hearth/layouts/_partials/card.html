@@ -1,5 +1,10 @@
 <article class="card">
-  {{ partial "post-meta.html" (dict "page" . "hideTags" true) }}
+  {{ $cat := or .Params.category (and .Params.categories (index .Params.categories 0)) }}
+  {{ with $cat }}
+    <p class="card-eyebrow">{{ . | humanize | upper }}</p>
+  {{ else }}
+    {{ partial "post-meta.html" (dict "page" . "hideTags" true) }}
+  {{ end }}
   <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
   <p class="card-summary">{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
   <a href="{{ .RelPermalink }}" class="card-read-more" aria-label="Read more: {{ .Title }}">Read more →</a>
