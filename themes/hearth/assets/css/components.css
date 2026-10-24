@@ -106,7 +106,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  margin: var(--space-s) 0 var(--space-m);
+  margin: var(--space-s) 0 0;
   padding-bottom: var(--space-s);
   border-bottom: 1px solid var(--border);
 }
