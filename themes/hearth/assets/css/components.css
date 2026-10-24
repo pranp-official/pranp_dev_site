@@ -544,7 +544,7 @@
 @media (min-width: 44rem) {
   .intro.has-image {
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     gap: var(--space-l);
   }
@@ -557,6 +557,7 @@
 .intro.has-image .intro-media {
   flex-shrink: 0;
   text-align: center;
+  margin-top: 0.35rem;
 }
 
 .intro-image {
