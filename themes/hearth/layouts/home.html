@@ -13,13 +13,29 @@
   {{ end }}
 </section>
 
+{{ $recentBlog := (where site.RegularPages "Section" "blog").ByDate.Reverse }}
+{{ with $recentBlog }}
 <section class="recent">
   <h2>Recent writing</h2>
   <div class="card-grid">
-    {{ range first 6 ((where site.RegularPages "Section" "blog").ByDate.Reverse) }}
+    {{ range first 6 . }}
       {{ partial "card.html" . }}
     {{ end }}
   </div>
   <p><a href="{{ "blog/" | relLangURL }}">All posts</a></p>
 </section>
+{{ else }}
+{{ $featuredWork := (where site.RegularPages "Section" "projects").ByWeight }}
+{{ with $featuredWork }}
+<section class="recent">
+  <h2>Featured work</h2>
+  <div class="card-grid">
+    {{ range first 4 . }}
+      {{ partial "card.html" . }}
+    {{ end }}
+  </div>
+  <p><a href="{{ "projects/" | relLangURL }}">All work →</a></p>
+</section>
+{{ end }}
+{{ end }}
 {{ end }}
