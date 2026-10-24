@@ -762,6 +762,110 @@
   text-decoration: underline;
 }
 
+/* Enterprise Callout Banner on /projects/ */
+.enterprise-callout {
+  margin-top: var(--space-m);
+  margin-bottom: var(--space-m);
+  padding: var(--space-m);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  max-width: var(--measure);
+}
+
+.enterprise-callout-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.enterprise-callout-badge .badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.enterprise-callout-badge .badge-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.enterprise-callout-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+}
+
+@media (min-width: 44rem) {
+  .enterprise-callout-body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+  }
+}
+
+.enterprise-callout-text {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--text);
+  flex: 1;
+}
+
+.enterprise-callout-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.enterprise-callout-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--accent);
+  color: var(--bg) !important;
+  font-family: var(--font-ui);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius);
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.enterprise-callout-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
+}
+
+.enterprise-callout-btn:active {
+  transform: translateY(0);
+}
+
+.enterprise-callout-btn .btn-arrow {
+  transition: transform 0.15s ease;
+}
+
+.enterprise-callout-btn:hover .btn-arrow {
+  transform: translateX(2px);
+}
+
+
 
 
 
