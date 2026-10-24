@@ -109,8 +109,8 @@ I did this work around my undergraduate years, mostly in machine learning, befor
 
 ## Selected Engineering Projects
 
-* **Low-Latency Vision Pipeline for Sports Analytics:** Engineered an automated badminton shot-detection and player-profiling system using OpenPose skeleton extraction and real-time ML classification pipelines.
-* **Remote Sensing Change Detection via Merkle & Quadtrees:** Designed a high-efficiency spatial change-detection algorithm combining Quadtrees with cryptographic Merkle Trees for fast verification of satellite imagery diffs.
+* **[Low-Latency Vision Pipeline for Sports Analytics](/projects/sports-vision-analytics/):** Engineered an automated badminton shot-detection and player-profiling system using OpenPose skeleton extraction and real-time ML classification pipelines.
+* **[Remote Sensing Change Detection via Merkle & Quadtrees](/projects/remote-sensing-merkle-quadtree/):** Designed a high-efficiency spatial change-detection algorithm combining Quadtrees with cryptographic Merkle Trees for fast verification of satellite imagery diffs.
 * **Zero-Touch University Result ETL & Analytics:** Built a one-click ETL pipeline that automated exam data ingestion and spun up customized ELK dashboards for instant academic performance analytics.
 
 ---
@@ -128,5 +128,5 @@ I'd like to hear from engineers, researchers and architects working on **cloud i
 
 If your team is building core security or identity infrastructure, and especially if you're hiring **Summer 2027 interns** who bring production experience and are eager to learn the research side, I'd love to chat.
 
-* **GitHub:** [github.com/pranp-official](#)
-* **LinkedIn:** [linkedin.com/in/pranp](#)
+* **GitHub:** [github.com/pranp-official](https://github.com/pranp-official)
+* **LinkedIn:** [linkedin.com/in/pranp](https://www.linkedin.com/in/pranp/)
