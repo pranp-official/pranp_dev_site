@@ -30,7 +30,13 @@
 <section class="recent">
   <h2>Featured work</h2>
   <div class="card-grid">
-    {{ range first 4 . }}
+    <article class="card">
+      <p class="card-eyebrow">PRODUCTION SYSTEMS</p>
+      <h3><a href="{{ "/about/#what-i-bring-industry-experience" | relURL }}">Cloud identity at OCI</a></h3>
+      <p class="card-summary">Nearly five years on the IAM team: federation, authorization and large-scale migration.</p>
+      <a href="{{ "/about/#what-i-bring-industry-experience" | relURL }}" class="card-read-more" aria-label="Read more: Cloud identity at OCI">Overview →</a>
+    </article>
+    {{ range first 3 . }}
       {{ partial "card.html" . }}
     {{ end }}
   </div>
