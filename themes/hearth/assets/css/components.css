@@ -5,12 +5,31 @@
   padding: var(--space-m);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 1px 3px rgba(34, 24, 16, 0.05), 0 4px 12px rgba(34, 24, 16, 0.03);
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover {
   border-color: var(--accent);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(34, 24, 16, 0.08), 0 0 0 1px var(--accent);
+}
+
+:root[data-theme="dark"] .card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+:root[data-theme="dark"] .card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45), 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+  :root:not([data-theme="light"]) .card:hover {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--accent) 30%, transparent);
+  }
 }
 
 .card h2,

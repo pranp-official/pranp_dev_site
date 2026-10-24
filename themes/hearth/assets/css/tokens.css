@@ -1,22 +1,22 @@
 :root {
   color-scheme: light dark;
 
-  /* Colour: light-dark(light value, dark value) */
-  --bg:          light-dark(#FAF6EE, #1C1815);
-  --surface:     light-dark(#F3ECDF, #25201C);
-  --text:        light-dark(#2B2118, #EDE4D3);
-  --muted:       light-dark(#6B5B4E, #B3A594);
-  --border:      light-dark(#E2D8C6, #3A332C);
-  --accent:      light-dark(#A3472B, #E0875F);
+  /* Colour: light-dark(light value, dark value) - Rustic European Town */
+  --bg:          light-dark(#F5EFE3, #13110F);
+  --surface:     light-dark(#EDE4D4, #1D1A17);
+  --text:        light-dark(#221810, #F0E7D8);
+  --muted:       light-dark(#665546, #AD9E8C);
+  --border:      light-dark(#DCD0BA, #322A23);
+  --accent:      light-dark(#98341A, #E27344);
   --avatar-border: light-dark(
-    color-mix(in srgb, var(--accent) 55%, var(--border)),
-    color-mix(in srgb, var(--accent) 28%, var(--border))
+    color-mix(in srgb, var(--accent) 60%, var(--border)),
+    color-mix(in srgb, var(--accent) 35%, var(--border))
   );
 
-  /* Code syntax tokens */
-  --code-string: light-dark(#5B6B2E, #B9C97A);
-  --code-func:   light-dark(#7A4B2A, #E8B88A);
-  --code-number: light-dark(#8A5A00, #E3B341);
+  /* Code syntax tokens - Antiqued rustic palette */
+  --code-string: light-dark(#456632, #A8C678);  /* patinated copper / aged sage */
+  --code-func:   light-dark(#883617, #E89E78);  /* burnt sienna / postbox rust */
+  --code-number: light-dark(#825906, #E5BC58);  /* antique brass / warm ochre */
 
   /* Type families */
   --font-display: "Fraunces", Georgia, "Times New Roman", serif;
