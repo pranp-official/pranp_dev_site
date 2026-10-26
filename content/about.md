@@ -86,7 +86,6 @@ This site is my public lab notebook. I'm writing as someone learning in public, 
 
 * **National Institute of Technology Karnataka, Surathkal (NITK)** — *India*  
   **B.Tech in Information Technology** *(2017 – 2021)* — *CGPA: 8.36 / 10.0*  
-  *Activities:* Technical Committee Member at IEEE NITK and the NITK Web Club; led winter mentorship programs in Computer Networks.
 
 ---
 
